@@ -3,7 +3,7 @@
 
 #define MAX 80
 
-void inToPostfix(char*, char*); // 中序轉後序 
+void inToPostfix(char*, char*);  // 中序轉後序 
 int priority(char); // 運算子優先
 double eval(char*); 
 double cal(char, double, double); 
