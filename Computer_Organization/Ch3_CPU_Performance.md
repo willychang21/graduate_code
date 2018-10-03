@@ -28,6 +28,7 @@
  * 效能評估程式
     * 工作量(Workload) : always running program (簡單比較)
     * 效能評估程式(Benchmark) : (主要比較)
-      * SPEC(System Performace Evaluation Coporation) -> 最新 : SPEC CPU2000[12整數(CINT2000) & 14浮點數(CFP2000)]
+      * SPEC(System Performace Evaluation Coporation)   
+      -> 最新 : SPEC CPU2000[12整數(CINT2000) & 14浮點數(CFP2000)]
         
         
