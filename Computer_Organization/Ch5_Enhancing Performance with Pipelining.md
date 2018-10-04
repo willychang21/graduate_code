@@ -40,7 +40,8 @@
       b. Instruction Reordering
       * Hardware  
       a. Forwarding  
-      b. Stall + Forwarding  
+      b. Detection → Stall(碰到load-use) → Forwarding  
+      [補]: Data dependency
     * Control hazards  
       * Software (Compiler)  
       a. Insert NOP  
@@ -61,7 +62,15 @@
             缺點 : 未必所有程式都可重排 → 適度加入NOP , 時脈週期增加)
        * Hardware  
           a. Forwarding(Bypassing)
-             加入特殊硬體來提早從內部資源獲取所缺少的項目
+             加入特殊硬體來提早從內部資源獲取所缺少的項目  
+          b. Detection → Stall → Forwarding   
+             (i) Detection  
+             Step1. 偵測目前指令是否有指令寫入暫存器(Reg.Write : R-type/lw)  
+             Step2. 目的暫存器不為0  
+             Step3. 偵測目前指令之`目的暫存器`與其後指令之`來源暫存器rs,rt`是否相同  
+             
+             
+             
              
           
             
