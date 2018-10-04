@@ -28,6 +28,26 @@
     * Data harzards : 後面的指令需用到前面指令的結果(Data dependency)，但前面指令還在管線中因此無法獲得
     * Control hazards : branch還沒決定要不要跳，後面的指令已經進入pipeline了(指令距離≤2)，  
       如果要跳那執行順序就會錯誤 → 又稱Branch hazards
-* **
+* **Hazard Solution**
+    * 3種Hazard皆可藉由暫停管線(Stall)來解決，只不過Clock Cycle Time ↑ , Performance ↓
+    * Structural hazards
+      * Add Hardware
+      * Stall (錯開指令並讓先進入pipeline的指令有較高優先順序使用硬體資源)
+    * Data harzards
+      * Software (Compiler)  
+      a. Insert NOP  
+      b. Instruction Reordering
+      * Hardware  
+      a. Forwarding  
+      b. Stall + Forwarding  
+    * Control hazards  
+      * Software (Compiler)  
+      a. Insert NOP  
+      b. Delay Branch  
+      * Hardware  
+      a. Predict not taken  
+      b. Flush wrong instruction
+    
+
     
 
