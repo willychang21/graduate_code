@@ -9,9 +9,9 @@
   稱(S,\*1,.....,\*k) 為algebraic system
   * 表示法 ： 二元運算表
   (S,*)=AS,S={a1,....an}
-* **close(Closure)**　: 若∀a,b∈S ⇒ `a*b∈S` , 則稱(S,\*)具closed  
-  **commutative**　: 若∀a,b∈S ⇒ `a*b=b*a` , 則稱(S,\*)具commutative  
-  **associative**　　: 若∀a,b∈S ⇒ `(a*b)*c=a*(b*c)`,則稱(S,\*)具associative  
+* **close(Closure)**　: 若∀a,b∈S ⇒ `a*b∈S` , 則稱(S,\*)具closed    
+  **associative**　　: 若∀a,b∈S ⇒ `(a*b)*c=a*(b*c)`,則稱(S,\*)具associative 
+    * **commutative**　: 若∀a,b∈S ⇒ `a*b=b*a` , 則稱(S,\*)具commutative
 * **left identity** : 若∃el ∈S ∋ ∀a∈S,`el*a=a` ,稱el為(S,\*)之left identity    
   **right idntity** : 若∃er ∈S ∋ ∀a∈S,`a*er=a` ,稱er為(S,\*)之right identity    
   **identity**　　: 若∃ e ∈S ∋ ∀a∈S,`a*e=a=e*a` ,稱e為(S,\*)之identity
@@ -23,12 +23,12 @@
 
 ### 群
 
-| 名稱 | closed |commutative | associative | identity | inverse property |
+| 名稱 | closed | associative | identity | inverse property |commutative |
 | :--: |:----: |:---------: |:----------: |:--------: |:---------------: |
-|半群(semigroup)|√     |            |√             |          |                  |
-|單群(monoid)   |√      |            |√             |√          |                  |
-|群(group)      |√      |            |√             | √         |√                  |
-|交換群(abelian group) |√      |√            |√             |√          |√                  |
+|半群(semigroup)|√     |√             |          |                  |     |
+|單群(monoid)   |√      |√             |√          |                  |    |
+|群(group)      |√       |√             | √         |√                  |   |
+|交換群(abelian group) |√             |√             |√          |√                  |√   |
 
 * (G,*):group , a,b ∈ G 
   * G 之 idenitity `存在唯一` ,記做e
@@ -54,7 +54,7 @@
     * **消去性**   : 若(S\*)具左消及右消 , 稱(S,\*)具消去性    
     → `消去性不一定是由inverse造成的` , 但`有inverse ⇒ 一定有消去性`
 
-  
+ 
 
 
   
