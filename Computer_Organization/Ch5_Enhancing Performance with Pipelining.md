@@ -36,7 +36,7 @@
       * NOP 無法解決
     * Data harzards
       * Software (Compiler)  
-      a. [Insert NOP](#Insert NOP)
+      a. [Insert NOP](#Insert NOP)  
       b. Instruction Reordering
       * Hardware  
       a. Forwarding  
