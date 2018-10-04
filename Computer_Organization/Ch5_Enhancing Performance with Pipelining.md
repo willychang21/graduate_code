@@ -26,7 +26,7 @@
 * **Pipeline Hazard**
     * Structural hazards : 硬體資源不足，同時間內要執行多個指令卻無法執行 (e.g.IF,ME同時使用Memory)
     * Data harzards : 後面的指令需用到前面指令的結果(Data dependency)，但前面指令還在管線中因此無法獲得
-    * Control hazards : branch還沒決定要不要跳，後面的指令已經進入pipeline了(指令距離≤2)，  
+    * Control hazards : branch還沒決定要不要跳，後面的指令已經進入pipeline了(指令距離≤2 in 5 stages MIPS pipeline)，    
       如果要跳那執行順序就會錯誤 → 又稱Branch hazards
 * **Hazard Solution**
     * 3種Hazard皆可藉由暫停管線(Stall)來解決，But Clock Cycle Time ↑ , Performance ↓
@@ -34,9 +34,9 @@
       * Add Hardware
       * Stall (錯開指令並讓先進入pipeline的指令有較高優先順序使用硬體資源)
       * NOP 無法解決
-    * [Data harzards](*Data hazard)
+    * Data harzards
       * Software (Compiler)  
-      a. Insert NOP
+      a. Insert NOP  
       b. Instruction Reordering
       * Hardware  
       a. Forwarding  
@@ -49,11 +49,22 @@
       a. Predict not taken  
       b. Flush wrong instruction
    * **Data hazard**
-       * Software
-          * Insert NOP  
+       * Software  
+          a. Insert NOP  
             NOP(No Operation) : 不幹嘛 ⇒ 不影響程式正確性  
             優點 : 簡單  
-            缺點 : 效率差 (NOP佔時脈週期)
+            缺點 : 效率差 (NOP佔時脈週期 e.g.2個NOP=佔2個Clock Cycle)  
+          b. Instruction Reordering/Pipeline scheduling  
+            不影響程式執行的正確性下，指令順序重新排列，將會造成Data hazard的指令對(Instruction pair)間距離拉開
+            (e.g. 拉開距離>2 in 5 stages MIPS pipeline)  
+            優點 : 不會增加時脈週期  
+            缺點 : 未必所有程式都可重排 → 適度加入NOP , 時脈週期增加)
+       * Hardware  
+          a. Forwarding(Bypassing)
+             加入特殊硬體來提早從內部資源獲取所缺少的項目
+             
+          
+            
             
             
 
