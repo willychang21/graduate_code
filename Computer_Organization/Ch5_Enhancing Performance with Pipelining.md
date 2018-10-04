@@ -24,18 +24,19 @@
 * **Pipeline Control Unit** 
 ![image](https://user-images.githubusercontent.com/38349902/46472178-ef054f00-c80e-11e8-97d1-a4d41ee9eb8d.png)
 * **Pipeline Hazard**
-    * Structural hazards : 硬體資源不足，同時間內要執行多個指令卻無法執行 (e.g.同時使用Mem)
+    * Structural hazards : 硬體資源不足，同時間內要執行多個指令卻無法執行 (e.g.IF,ME同時使用Memory)
     * Data harzards : 後面的指令需用到前面指令的結果(Data dependency)，但前面指令還在管線中因此無法獲得
     * Control hazards : branch還沒決定要不要跳，後面的指令已經進入pipeline了(指令距離≤2)，  
       如果要跳那執行順序就會錯誤 → 又稱Branch hazards
 * **Hazard Solution**
-    * 3種Hazard皆可藉由暫停管線(Stall)來解決，只不過Clock Cycle Time ↑ , Performance ↓
+    * 3種Hazard皆可藉由暫停管線(Stall)來解決，But Clock Cycle Time ↑ , Performance ↓
     * Structural hazards
       * Add Hardware
       * Stall (錯開指令並讓先進入pipeline的指令有較高優先順序使用硬體資源)
+      * NOP 無法解決
     * Data harzards
       * Software (Compiler)  
-      a. Insert NOP  
+      a. [Insert NOP](#管線化(Pipelining))
       b. Instruction Reordering
       * Hardware  
       a. Forwarding  
@@ -47,7 +48,14 @@
       * Hardware  
       a. Predict not taken  
       b. Flush wrong instruction
-    
+   * **Data hazard**
+       * Software
+          * Insert NOP  
+            NOP(No Operation) : 不幹嘛 ⇒ 不影響程式正確性  
+            優點 : 簡單  
+            缺點 : 效率差 (NOP佔時脈週期)
+            
+            
 
     
 
