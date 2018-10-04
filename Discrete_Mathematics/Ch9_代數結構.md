@@ -26,8 +26,8 @@
 | 名稱 | closed |commutative | associative | identity | inverse property |
 | :--: |:----: |:---------: |:----------: |:--------: |:---------------: |
 |半群(semigroup)|√     |            |√             |          |                  |
-|單群(monoid)   |√      |            |√             |          |                  |
-|群(group)      |√      |            |√             | √         |                  |
+|單群(monoid)   |√      |            |√             |√          |                  |
+|群(group)      |√      |            |√             | √         |√                  |
 |交換群(abelian group) |√      |√            |√             |√          |√                  |
 
 * (G,*):group , a,b ∈ G 
