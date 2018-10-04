@@ -34,9 +34,9 @@
       * Add Hardware
       * Stall (錯開指令並讓先進入pipeline的指令有較高優先順序使用硬體資源)
       * NOP 無法解決
-    * Data harzards
+    * [Data harzards](#**Data hazard**)
       * Software (Compiler)  
-      a. [Insert NOP](#Insert NOP)  
+      a. Insert NOP
       b. Instruction Reordering
       * Hardware  
       a. Forwarding  
