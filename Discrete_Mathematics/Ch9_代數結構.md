@@ -42,7 +42,7 @@
        a^k=a\*...\*a  
        a^0=e → a^(-k)=(a^k)^-1
     * (Z,+)在加法群中:  
-      a^l=ka  
+      a^k=ka  
       a^(-k)=-ka  
     * G:group  
       (i) 若ab=c ⇒ (a^-1)ab=(a^-1)c ⇒ eb=(a^-1)c ⇒ b=(a^-1)c  
