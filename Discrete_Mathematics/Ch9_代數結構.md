@@ -53,6 +53,13 @@
     * **右消去性** : 若∀a,b,c∈S,b\*a=c\*a ⇒ b=c , 稱(S,\*)具右消去性
     * **消去性**   : 若(S\*)具左消及右消 , 稱(S,\*)具消去性    
     → `消去性不一定是由inverse造成的` , 但`有inverse ⇒ 一定有消去性`
+ * **o(G)** : |G|稱為G之order , 記作o(G)→個數
+ 
+ ### 有限群 : Zn & Sn
+ 
+ * Congruence group of modulo n  
+ * Permutation group or Symmetric group (In general,Sn不為abelian)
+   
 
  
 
