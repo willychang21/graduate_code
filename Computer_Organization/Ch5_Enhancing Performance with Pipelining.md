@@ -75,10 +75,34 @@
                 由於MEM/WB階段的結果是最先出來的，因此須將`MEM hazard`的偵測碼修改
                 ![image](https://user-images.githubusercontent.com/38349902/46534664-80da8e00-c8db-11e8-8273-067612b955f7.png)  
                 (iii) Stall    
-                load-use data hazard : 當lw指令後跟著的指令需要讀取的來源暫存器 = lw 之目的暫存器    
+                load-use data hazard : 當lw指令後跟著的指令需要讀取的來源暫存器 = lw 之目的暫存器  ⇒ hazard detection unit 解決  
                 偵測碼  
                 ![image](https://user-images.githubusercontent.com/38349902/46537189-4117a480-c8e3-11e8-9737-e1fba7623333.png)  
-                ![image](https://user-images.githubusercontent.com/38349902/46540074-e2eebf80-c8ea-11e8-8a84-a3b3b55380bf.png)
+                ![image](https://user-images.githubusercontent.com/38349902/46540921-45e15600-c8ed-11e8-8adc-09738a965be5.png)  
+* **Data dependency** 
+    * RAW ( read  after write ) 寫後讀 ( 唯一會在MIPS 2000造成hazard : True data dependecy )  
+    ```
+    add s0 , s1 , s2  
+    sub t1 , s0 , t2
+    ```
+    * WAR ( write after read  ) 讀後寫 ( False data dependecy )  
+    ```
+    add s0 , s1 , s2  
+    sub s1 , t1 , t2
+    ```
+    * WAW ( write after write ) 寫後寫 ( False data dependency )   
+    ```
+    add s0 , s1 , s2  
+    sub s0 , t1 , t2  
+    ```
+* **Control hazard**
+    * Software (Compiler)  
+      a. Insert NOP  
+      b. Delay Branch  
+    * Hardware  
+      a. Predict not taken  
+      b. Flush wrong instruction
+
 
 
                 
