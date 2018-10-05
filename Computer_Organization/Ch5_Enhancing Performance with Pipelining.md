@@ -40,7 +40,7 @@
       b. Instruction Reordering
       * Hardware  
       a. Forwarding  
-      b. Detection → Stall(碰到load-use) → Forwarding  
+      b. Detection → Stall(碰到load-use才會) → Forwarding  
       [補]: Data dependency
     * Control hazards  
       * Software (Compiler)  
@@ -67,11 +67,27 @@
              　　(i) Detection  
              　　　Step1. 偵測目前指令是否有指令寫入暫存器(Reg.Write : R-type/lw)  
              　　　Step2. 目的暫存器不為0  
-             　　　Step3. 偵測目前指令之`目的暫存器`與其後指令之`來源暫存器rs,rt`是否相同 
-                ![image](https://user-images.githubusercontent.com/38349902/46528109-8a58fb80-c8c5-11e8-94dc-01eaf94fa00a.png)  
-                ![image](https://user-images.githubusercontent.com/38349902/46528310-2256e500-c8c6-11e8-9f2d-2f7c35ba5e7f.png)  
+             　　　Step3. 偵測目前指令之`目的暫存器`與其後指令之`來源暫存器rs,rt`是否相同  
+                ![image](https://user-images.githubusercontent.com/38349902/46531153-c04ead80-c8ce-11e8-88ad-95f3e2f667e0.png) 
                 (ii) Forwarding  
+                ![image](https://user-images.githubusercontent.com/38349902/46534011-48d24b80-c8d9-11e8-9b15-47795f52e7d1.png)
+                ![image](https://user-images.githubusercontent.com/38349902/46534044-6b646480-c8d9-11e8-9182-3e0d5c8916ed.png)  
+                由於MEM/WB階段的結果是最先出來的，因此須將`MEM hazard`的偵測碼修改
+                ![image](https://user-images.githubusercontent.com/38349902/46534664-80da8e00-c8db-11e8-8273-067612b955f7.png)  
+                (iii) Stall    
+                load-use data hazard : 當lw指令後跟著的指令需要讀取的來源暫存器 = lw 之目的暫存器    
+                偵測碼  
+                ![image](https://user-images.githubusercontent.com/38349902/46537189-4117a480-c8e3-11e8-9737-e1fba7623333.png)  
+                ![image](https://user-images.githubusercontent.com/38349902/46540074-e2eebf80-c8ea-11e8-8a84-a3b3b55380bf.png)
+
+
                 
+                
+
+                
+
+
+              
 
 
   
