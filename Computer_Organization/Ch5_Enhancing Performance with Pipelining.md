@@ -68,6 +68,15 @@
              　　　Step1. 偵測目前指令是否有指令寫入暫存器(Reg.Write : R-type/lw)  
              　　　Step2. 目的暫存器不為0  
              　　　Step3. 偵測目前指令之`目的暫存器`與其後指令之`來源暫存器rs,rt`是否相同  
+                ![image](https://user-images.githubusercontent.com/38349902/46528109-8a58fb80-c8c5-11e8-94dc-01eaf94fa00a.png)  
+                ![image](https://user-images.githubusercontent.com/38349902/46528310-2256e500-c8c6-11e8-9f2d-2f7c35ba5e7f.png)
+
+
+  
+                
+                
+
+
              
              
              
