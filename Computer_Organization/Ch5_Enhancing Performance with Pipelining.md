@@ -38,6 +38,7 @@
 * Control hazards : branch還沒決定要不要跳(之前教的是在MEM決定)，後面的指令已經進入pipeline了(進入IF,ID,EX中)，  
                     如果要跳那執行順序就會錯誤 → 又稱Branch hazards
 ## (五)Hazard　Solution
+------
 * 3種Hazard皆可藉由暫停管線(Stall)來解決，But Clock Cycle Time ↑ , Performance ↓
 * **Structural hazards**
   * Add Hardware
