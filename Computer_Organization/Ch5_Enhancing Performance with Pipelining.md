@@ -1,6 +1,6 @@
 ## Enhancing Performance with Pipelining
 * [(一) Pipeline](#一)
-* [(二) Pipeline datapath](#Pipeline-datapath)
+* [(二) Pipeline datapath](#anchors-in-markdown)
 * [(三) Pipeline Control Unit](#)
 * [(四) Pipeline hazard](#Pipe)
 * [(五) Hazard Solution](#)
@@ -32,7 +32,7 @@
    * Speedup = S × N × T /{ [(S-1) + N ] × T' } , if N → ∞ ,Speedup = S
    * 1個指令花S-1個Clock通過管線，N個指令花(S-1) + N  
    
-Pipeline datapath
+anchors-in-markdown
 ------
 ![image](https://user-images.githubusercontent.com/38349902/46470323-c712ed00-c808-11e8-82e7-b41e1719c42a.png)
 (三) Pipeline Control Unit
