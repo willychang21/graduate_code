@@ -2,13 +2,13 @@
 * [(一) Pipeline](https://github.com/willychang21/CodeWiki/blob/master/Computer_Organization/Ch5_Enhancing%20Performance%20with%20Pipelining.md#%E4%B8%80pipeline)
 * [(二) Pipeline datapath](https://github.com/willychang21/CodeWiki/blob/master/Computer_Organization/Ch5_Enhancing%20Performance%20with%20Pipelining.md#%E4%BA%8C-pipeline-datapath)
 * [(三) Pipeline Control Unit](https://github.com/willychang21/CodeWiki/blob/master/Computer_Organization/Ch5_Enhancing%20Performance%20with%20Pipelining.md#%E5%9B%9Bpipeline-hazard)
-* [(四) Pipeline hazard](#4)
+* [(四) Pipeline hazard]()
 * [(五) Hazard Solution](https://github.com/willychang21/CodeWiki/blob/master/Computer_Organization/Ch5_Enhancing%20Performance%20with%20Pipelining.md#%E4%BA%94hazardsolution)
-* [(六) Data hazard](#6)
-* [(七) Data dependency](#7)
-* [(八) Control hazard (Branch hazard)](#8)  
+* [(六) Data hazard](https://github.com/willychang21/CodeWiki/blob/master/Computer_Organization/Ch5_Enhancing%20Performance%20with%20Pipelining.md#%E5%85%ADdatahazard)
+* [(七) Data dependency](https://github.com/willychang21/CodeWiki/blob/master/Computer_Organization/Ch5_Enhancing%20Performance%20with%20Pipelining.md#%E4%B8%83datadependency)
+* [(八) Control hazard (Branch hazard)](https://github.com/willychang21/CodeWiki/blob/master/Computer_Organization/Ch5_Enhancing%20Performance%20with%20Pipelining.md#%E5%85%ABcontrolhazardbranchhazard)  
 
-(一)Pipeline
+(一) Pipeline
 ------
 * **管線化(Pipelining)** 
    * 多個指令重疊執行(Overlap execution)，同一時間平行處理不同Stage's job → 硬體使用率 ↑，throughput ↑
@@ -34,7 +34,7 @@
 <span id = "2">(二) Pipeline datapath</span>  
 ------
 ![image](https://user-images.githubusercontent.com/38349902/46470323-c712ed00-c808-11e8-82e7-b41e1719c42a.png)
-(三)Pipeline　Control　Unit
+(三) Pipeline　Control　Unit
 ------
 ![image](https://user-images.githubusercontent.com/38349902/46472178-ef054f00-c80e-11e8-97d1-a4d41ee9eb8d.png)  
 
