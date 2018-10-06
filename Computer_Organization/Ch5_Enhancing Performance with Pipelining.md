@@ -2,7 +2,7 @@
 * [(一)Pipeline](#(一)Pipeline)
 * [(二)Pipeline　datapath](#(二)Pipeline　datapath)
 * [(三)Pipeline　Control Unit](#(三)Pipeline　Control　Unit)
-* [(四)Pipeline hazard](#(四)Pipeline-hazard)
+* [(四) Pipeline hazard](#(四)Pipeline-hazard)
 * [(五)Hazard　Solution](#(五)Hazard　Solution)
 * [(六)Data　hazard](#(六)Data　hazard)
 * [(七)Data　dependency](#(七)Data　dependency)
