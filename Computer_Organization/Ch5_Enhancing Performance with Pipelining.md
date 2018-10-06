@@ -2,7 +2,7 @@
 * [(一) Pipeline]()
 * [(二) Pipeline datapath]()
 * [(三) Pipeline Control Unit]()
-* [(四) Pipeline hazard](#(四)-Pipeline-hazard)
+* [(四) Pipeline hazard](#(四)Pipelinehazard)
 * [(五) Hazard Solution]()
 * [(六) Data hazard]()
 * [(七) Data dependency]()
@@ -39,7 +39,7 @@
 ------
 ![image](https://user-images.githubusercontent.com/38349902/46472178-ef054f00-c80e-11e8-97d1-a4d41ee9eb8d.png)  
 
-### (四) Pipeline hazard
+### (四)Pipelinehazard
 -----------
 * Structural hazards : 硬體資源不足，同時間內要執行多個指令卻無法執行 (e.g.IF,ME同時使用Single-Memory)
 * Data harzards : 後面的指令需用到前面指令的結果(Data dependency)，但前面指令還在管線中因此無法獲得(指令距離≤2 in 5 stages MIPS pipeline)
