@@ -1,5 +1,5 @@
 ## Enhancing Performance with Pipelining
-* [(一) Pipeline](#1)
+* [(一) Pipeline](https://github.com/willychang21/CodeWiki/blob/master/Computer_Organization/Ch5_Enhancing%20Performance%20with%20Pipelining.md#%E4%B8%80pipeline)
 * [(二) Pipeline datapath](#2)
 * [(三) Pipeline Control Unit](#3)
 * [(四) Pipeline hazard](#4)
