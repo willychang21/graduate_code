@@ -1,6 +1,6 @@
 # Enhancing Performance with Pipelining
 * [重點一：Pipeline](#重點一)
-* [重點二： Pipeline datapath](#重點二)
+* [重點二：Pipeline datapath](#重點二)
 * [重點三：Pipeline Control Unit](#重點三)
 * [重點四：Pipeline hazard](#重點四)
 * [重點五：Hazard Solution](#重點五)
@@ -99,33 +99,72 @@
          ![image](https://user-images.githubusercontent.com/38349902/46540921-45e15600-c8ed-11e8-8adc-09738a965be5.png)  
 ## 重點七         
 ### Data dependency
-------
-* RAW ( read  after write ) 寫後讀 ( 唯一會在MIPS 2000造成hazard : True data dependecy )  
+* **RAW** ( read  after write ) 寫後讀 ( 唯一會在MIPS 2000造成hazard : True data dependecy )  
     ```
     add s0 , s1 , s2  
     sub t1 , s0 , t2
     ```
-* WAR ( write after read  ) 讀後寫 ( False data dependecy )  
+* **WAR** ( write after read  ) 讀後寫 ( False data dependecy )  
     ```
     add s0 , s1 , s2  
     sub s1 , t1 , t2
     ```
-* WAW ( write after write ) 寫後寫 ( False data dependency )   
+* **WAW** ( write after write ) 寫後寫 ( False data dependency )   
     ```
     add s0 , s1 , s2  
     sub s0 , t1 , t2  
     ```
 ## 重點八
 ### Control hazard (Branch hazard)
-* Software (Compiler)  
-  * Insert NOP          
-  * Delay Branch (safty branch ) → hard   
+* **Software** (Compiler)  
+    * Insert NOP          
+    * Delay Branch (safty branch ) → hard
+      * Compiler & Assembler 將不論branch有沒有跳都不會影響到的指令(照常執行)放到`branch delay slot`中
          
-* Hardware  
-  * Predict not taken
-  * Flush wrong instruction  
-  ![image](https://user-images.githubusercontent.com/38349902/46568870-cbf9ad00-c97e-11e8-9906-d74e586ec439.png)
-  ![image](https://user-images.githubusercontent.com/38349902/46568873-d6b44200-c97e-11e8-92ee-f8d2ac67020b.png)
+* **Hardware**  
+    * Predict not taken
+    * Flush wrong instruction  
+    ![image](https://user-images.githubusercontent.com/38349902/46568870-cbf9ad00-c97e-11e8-9906-d74e586ec439.png)
+    ![image](https://user-images.githubusercontent.com/38349902/46568873-d6b44200-c97e-11e8-92ee-f8d2ac67020b.png)
+* **Branch's data hazard**
+    * Forwarding 
+    ```
+    add $1 , $2 , $3    //第1行
+    add $4 , $5 , $6    //第2行
+    ........            //第3行，這行隨便
+    beq $1 , $4 ,target //第4行，beq的來源暫存器與1,2行的目的暫存器有data dependency
+    ```
+    * Stall 1 Clock
+     ```
+    lw  $1 , addr       //第1行
+    add $4 , $5 , $6    //第2行
+    Stall               //第3行
+    beq $1 , $4 ,target //第4行，beq的來源暫存器與1,2行的目的暫存器有data dependency
+    ```
+    * Stall 2 Clock 
+    ```
+    lw  $1 , addr       //第1行
+    Stall               //第2行
+    Stall               //第3行
+    beq $1 , $4 ,target //第4行，beq的來源暫存器與1,2行的目的暫存器有data dependency
+    ```
+    * 結論 : 與beq有data dependency，ALU指令需與beq間隔1行，lw則是2行
+* **Branch Prediction**
+    * Static  : 永遠猜跳或不跳 ( 上面介紹的是假設不跳 )
+    * Dynamic : 用`Run Time Information`(以前幾次被執行的時候有沒有跳的紀錄)為依據來猜這次branch是否要，而Run 
+    　　　　     Time Information存於`branch prediction buffur` 或 `branch history table (BHT)`  
+　　　　         [註]BHT:由branch指令位址較低部分作為索引的小型記憶體，記憶體包含1-bit指示最近是否有branch發生
+　　　　         [註]branch predictor算出branch是否成立，但計算目的位址在5 Stage popeline中，需要1 Clock(Penalty)   
+　　　　         但可以透過以`branch target buffer`為cache，來存放目的地PC或是目的地指令來消除Penalty   
+      * 1-bit prediction scheme : 錯一次改猜別的 (見風轉舵型)
+      * 2-bit prediction scheme : 強猜跳 ↔ 弱猜跳 ↔ 弱猜不跳 ↔ 強猜不跳  
+      * correlating predictor : 2-bit只使用特定branch資訊，但同時使用local & global branch執行資訊  
+      　　　　　　　　　       　，在相同個prediction bit下，準確度更高
+      * tournament predictor : 每個branch使用多個predictor，追蹤看哪個predictor產生比較好的結果，再用選擇器
+      　　　　　　　　　　       決定要用誰做預測
+       
+    
+  
 
    
 
