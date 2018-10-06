@@ -1,15 +1,14 @@
 ## Enhancing Performance with Pipelining
-* [(一) Pipeline](#5.1.Pipeline)
-* [(二) Pipeline datapath](#anchors-in-markdown)
-* [(三) Pipeline Control Unit](#)
-* [(四) Pipeline hazard](#Pipe)
-* [(五) Hazard Solution](#)
-* [(六) Data hazard](#)
-* [(七) Data dependency](#)
-* [(八) Control hazard (Branch hazard)](#)
-* [横线](#横线)
-
-5.1.Pipeline
+* [(一) Pipeline](#一)
+* [(二) Pipeline datapath](#二)
+* [(三) Pipeline Control Unit](#三)
+* [(四) Pipeline hazard](#四)
+* [(五) Hazard Solution](五)
+* [(六) Data hazard](六)
+* [(七) Data dependency](七)
+* [(八) Control hazard (Branch hazard)](八)
+## 一
+(一) Pipeline
 ------
 * **管線化(Pipelining)** 
    * 多個指令重疊執行(Overlap execution)，同一時間平行處理不同Stage's job → 硬體使用率 ↑，throughput ↑
@@ -31,15 +30,15 @@
    * CPI = [(S-1) + N ] / N ,if N → ∞ , CPI = 1
    * Speedup = S × N × T /{ [(S-1) + N ] × T' } , if N → ∞ ,Speedup = S
    * 1個指令花S-1個Clock通過管線，N個指令花(S-1) + N  
-   
-anchors-in-markdown
+## 二   
+(二) Pipeline datapath
 ------
 ![image](https://user-images.githubusercontent.com/38349902/46470323-c712ed00-c808-11e8-82e7-b41e1719c42a.png)
 (三) Pipeline Control Unit
 ------
 ![image](https://user-images.githubusercontent.com/38349902/46472178-ef054f00-c80e-11e8-97d1-a4d41ee9eb8d.png)  
 
-Pipeline
+(四) Pipeline hazard
 ------
 * Structural hazards : 硬體資源不足，同時間內要執行多個指令卻無法執行 (e.g.IF,ME同時使用Single-Memory)
 * Data harzards : 後面的指令需用到前面指令的結果(Data dependency)，但前面指令還在管線中因此無法獲得(指令距離≤2 in 5 stages MIPS pipeline)
@@ -127,8 +126,7 @@ Pipeline
   * Predict not taken  
   * Flush wrong instruction
 
-### 横线
------------
+
 
 
 
