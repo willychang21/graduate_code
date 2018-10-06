@@ -6,7 +6,7 @@
 * [(五) Hazard Solution](#5)
 * [(六) Data hazard](#6)
 * [(七) Data dependency](#7)
-* [(八) Control hazard (Branch　hazard)](#8)  
+* [(八) Control hazard (Branch hazard)](#8)  
 
 (一)Pipeline
 ------
@@ -31,7 +31,7 @@
    * Speedup = S × N × T /{ [(S-1) + N ] × T' } , if N → ∞ ,Speedup = S
    * 1個指令花S-1個Clock通過管線，N個指令花(S-1) + N  
    
-(二)Pipeline　datapath  
+<span id = "2">(二) Pipeline datapath</span>  
 ------
 ![image](https://user-images.githubusercontent.com/38349902/46470323-c712ed00-c808-11e8-82e7-b41e1719c42a.png)
 (三)Pipeline　Control　Unit
