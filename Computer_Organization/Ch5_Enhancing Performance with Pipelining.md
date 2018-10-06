@@ -118,13 +118,16 @@
 ## 重點八
 ### Control hazard (Branch hazard)
 * Software (Compiler)  
-  * Insert NOP  
-            
-  * Delay Branch    
+  * Insert NOP          
+  * Delay Branch (safty branch ) → hard   
          
 * Hardware  
-  * Predict not taken  
-  * Flush wrong instruction
+  * Predict not taken
+  * Flush wrong instruction  
+  ![image](https://user-images.githubusercontent.com/38349902/46568870-cbf9ad00-c97e-11e8-9906-d74e586ec439.png)
+  ![image](https://user-images.githubusercontent.com/38349902/46568873-d6b44200-c97e-11e8-92ee-f8d2ac67020b.png)
+
+   
 
 
 
