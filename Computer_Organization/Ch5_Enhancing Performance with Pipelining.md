@@ -6,7 +6,8 @@
 * [(五) Hazard Solution](https://github.com/willychang21/CodeWiki/blob/master/Computer_Organization/Ch5_Enhancing%20Performance%20with%20Pipelining.md#%E4%BA%94hazardsolution)
 * [(六) Data hazard](https://github.com/willychang21/CodeWiki/blob/master/Computer_Organization/Ch5_Enhancing%20Performance%20with%20Pipelining.md#%E5%85%ADdatahazard)
 * [(七) Data dependency](https://github.com/willychang21/CodeWiki/blob/master/Computer_Organization/Ch5_Enhancing%20Performance%20with%20Pipelining.md#%E4%B8%83datadependency)
-* [(八) Control hazard (Branch hazard)](https://github.com/willychang21/CodeWiki/blob/master/Computer_Organization/Ch5_Enhancing%20Performance%20with%20Pipelining.md#%E5%85%ABcontrolhazardbranchhazard)  
+* [(八) Control hazard (Branch hazard)](https://github.com/willychang21/CodeWiki/blob/master/Computer_Organization/Ch5_Enhancing%20Performance%20with%20Pipelining.md#%E5%85%ABcontrolhazardbranchhazard)
+* [横线](#横线)
 
 (一) Pipeline
 ------
@@ -125,6 +126,9 @@
 * Hardware  
   * Predict not taken  
   * Flush wrong instruction
+
+### 横线
+-----------
 
 
 
