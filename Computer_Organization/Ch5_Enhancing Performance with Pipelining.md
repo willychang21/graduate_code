@@ -49,8 +49,8 @@
       * Hardware  
       a. Predict not taken  
       b. Flush wrong instruction
-   * **Data hazard**
-       * Software  
+ * **Data hazard**
+     * Software    
           a. Insert NOP  
             NOP(No Operation) : 不幹嘛 ⇒ 不影響程式正確性  
             優點 : 簡單  
@@ -60,7 +60,7 @@
             (e.g. 拉開距離>2 in 5 stages MIPS pipeline)  
             優點 : 不會增加時脈週期  
             缺點 : 未必所有程式都可重排 → 適度加入NOP , 時脈週期增加)
-       * Hardware  
+     * Hardware    
           a. Forwarding(Bypassing)
              加入特殊硬體來提早從內部資源獲取所缺少的項目  
           b. Detection → Stall → Forwarding   
@@ -95,7 +95,7 @@
     add s0 , s1 , s2  
     sub s0 , t1 , t2  
     ```
-* **Control hazard**
+* **Control hazard (Branch hazard)**
     * Software (Compiler)  
       a. Insert NOP  
       b. Delay Branch  
