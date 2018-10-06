@@ -1,13 +1,13 @@
 ## Enhancing Performance with Pipelining
-* [(一) Pipeline](#一)
-* [(二) Pipeline datapath](#二)
+* [(一) Pipeline](#a-b)
+* [(二) Pipeline datapath](#c-d)
 * [(三) Pipeline Control Unit](#三)
 * [(四) Pipeline hazard](#四)
 * [(五) Hazard Solution](五)
 * [(六) Data hazard](六)
 * [(七) Data dependency](七)
 * [(八) Control hazard (Branch hazard)](八)
-## 一
+## a-b
 (一) Pipeline
 ------
 * **管線化(Pipelining)** 
@@ -30,7 +30,7 @@
    * CPI = [(S-1) + N ] / N ,if N → ∞ , CPI = 1
    * Speedup = S × N × T /{ [(S-1) + N ] × T' } , if N → ∞ ,Speedup = S
    * 1個指令花S-1個Clock通過管線，N個指令花(S-1) + N  
-## 二   
+## c-d  
 (二) Pipeline datapath
 ------
 ![image](https://user-images.githubusercontent.com/38349902/46470323-c712ed00-c808-11e8-82e7-b41e1719c42a.png)
