@@ -1,9 +1,9 @@
 ## Enhancing Performance with Pipelining
 * [(一) Pipeline](https://github.com/willychang21/CodeWiki/blob/master/Computer_Organization/Ch5_Enhancing%20Performance%20with%20Pipelining.md#%E4%B8%80pipeline)
-* [(二) Pipeline datapath](#2)
-* [(三) Pipeline Control Unit](#3)
+* [(二) Pipeline datapath](https://github.com/willychang21/CodeWiki/blob/master/Computer_Organization/Ch5_Enhancing%20Performance%20with%20Pipelining.md#%E4%BA%8C-pipeline-datapath)
+* [(三) Pipeline Control Unit](https://github.com/willychang21/CodeWiki/blob/master/Computer_Organization/Ch5_Enhancing%20Performance%20with%20Pipelining.md#%E5%9B%9Bpipeline-hazard)
 * [(四) Pipeline hazard](#4)
-* [(五) Hazard Solution](#5)
+* [(五) Hazard Solution](https://github.com/willychang21/CodeWiki/blob/master/Computer_Organization/Ch5_Enhancing%20Performance%20with%20Pipelining.md#%E4%BA%94hazardsolution)
 * [(六) Data hazard](#6)
 * [(七) Data dependency](#7)
 * [(八) Control hazard (Branch hazard)](#8)  
@@ -36,7 +36,8 @@
 ![image](https://user-images.githubusercontent.com/38349902/46470323-c712ed00-c808-11e8-82e7-b41e1719c42a.png)
 (三)Pipeline　Control　Unit
 ------
-![image](https://user-images.githubusercontent.com/38349902/46472178-ef054f00-c80e-11e8-97d1-a4d41ee9eb8d.png)
+![image](https://user-images.githubusercontent.com/38349902/46472178-ef054f00-c80e-11e8-97d1-a4d41ee9eb8d.png)  
+
 (四)Pipeline hazard
 ------
 * Structural hazards : 硬體資源不足，同時間內要執行多個指令卻無法執行 (e.g.IF,ME同時使用Single-Memory)
