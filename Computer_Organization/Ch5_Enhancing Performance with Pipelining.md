@@ -8,7 +8,7 @@
 * [(七) Data dependency]()
 * [(八) Control hazard (Branch hazard)]()
 * [横线](#横线)
-
+-----------
 (一) Pipeline
 ------
 * **管線化(Pipelining)** 
