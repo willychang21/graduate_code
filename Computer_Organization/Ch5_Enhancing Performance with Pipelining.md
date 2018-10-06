@@ -7,6 +7,8 @@
 * [重點六：Data hazard](#重點六)
 * [重點七：Data dependency](#重點七)
 * [重點八：Control hazard (Branch hazard)](#重點八)
+* [重點九：Advanced pipeline](#重點九)
+* [重點十：Pipeline Exception Handling](#重點十)
 ## 重點一
 ### Pipeline
 * **管線化(Pipelining)** 
@@ -120,6 +122,12 @@
     * Insert NOP          
     * Delay Branch (safty branch ) → hard
       * Compiler & Assembler 將不論branch有沒有跳都不會影響到的指令(照常執行)放到`branch delay slot`中
+      * branch delay slot : branch delay都會執行到後面的指令位置，放`safty instruction`
+      * 三種放法
+      ![image](https://user-images.githubusercontent.com/38349902/46571511-c1540d80-c9a8-11e8-8577-f4afdbb5c8be.png)  
+      * 優點 : 簡單、有效率
+      * 缺點 : 當處理器管線延長、每個Clock分發指令數提高， 1 個 branch delay slot 已經不夠用了，雖然彈性高，但代價卻很大
+
          
 * **Hardware**  
     * Predict not taken
@@ -158,11 +166,83 @@
 　　　　         但可以透過以`branch target buffer`為cache，來存放目的地PC或是目的地指令來消除Penalty   
       * 1-bit prediction scheme : 錯一次改猜別的 (見風轉舵型)
       * 2-bit prediction scheme : 強猜跳 ↔ 弱猜跳 ↔ 弱猜不跳 ↔ 強猜不跳  
-      * correlating predictor : 2-bit只使用特定branch資訊，但同時使用local & global branch執行資訊  
-      　　　　　　　　　       　，在相同個prediction bit下，準確度更高
-      * tournament predictor : 每個branch使用多個predictor，追蹤看哪個predictor產生比較好的結果，再用選擇器
-      　　　　　　　　　　       決定要用誰做預測
+      * correlating predictor：2-bit只使用特定branch資訊，但同時使用local & global branch執行資訊  
+      　　　　　　　　　       ，在相同個prediction bit下，準確度更高
+      * tournament predictor：每個branch使用多個predictor，追蹤看哪個predictor產生比較好的結果，再用選擇器
+      　　　　　　　　　　      決定要用誰做預測
+## 重點九
+### Advanced pipeline 
+* **Instruction-level Parallelism (ILP)** : 管線充分利用指令之間潛在的平行度
+* **提升ILP的方法**
+    * Increase pipeline depth(長度不變)，切更多的Stage → Superpipeline (MIPS不是)
+      * 優點：Speedup ↑ (∵ Clock縮短了)
+      * 缺點：a. hazard ↑   
+      　　　b. 較難平衡各Stage的時間
+      * 解決：a. 平衡Stage  
+      　　　b. 用pipeline scheduling               
+    * Mutiple issue : 大量複製pipeline功能單元讓1個Clock可塞多個指令 ⇒ 使CPI < 1
+      * 實作：a. static multiple： program compile in compiler 時 (執行前)  
+      　　　b. dynamic mulitiple： program execute in processor 時 (執行中) → 又稱 Superscaler　　　
+      * 解決：a. Pack instruction : packing instr.in issue slot → stactic : compiler
+      　　　　　　　　　　　　　　　　　　　　　　　→ dynamic : processor   
+      　　　b. handle data/control hazard：→ stactic : compiler  
+         　　　　　　　　　　　　　　　　　→ dynamic : Hardware
+      * Static multiple issue MIPS ISA Example
+        * 一次分發兩個指令 : 整數型ALU/Branch(前32bits) + lw/sw(後32bits) = 64 bits
+      * Dynamic multiple issue proceesor (Superscaler)
+* **Speculation**
+    * 猜測允許Compiler或是Processor去猜測某指令的性質，以便能夠執行其他和這個被猜測指令相關的指令
+    * Software
+      * Insert check code
+      * provide fix software
+    * Hardware
+      * buffer result
+      * flush buffer if guess wrong
+* **Code Scheduling**
+* **超長指令集VLIW**
+    * 早期 : 每個指令做的事很少，造價貴，基本指令格式超長，hardware有多少，欄位就如何      
+            現今 : hardware變便宜，實現VLIW，Static mutilple issue ~ VLIW
+    * 優點 
+      * Simpler hardware
+      * More Scalable (容易規模擴增)
+    * 缺點
+      * Programmer/Compiler complexity and longer comoilation times
+      * hazard 無法解決就只能Stall
+      * 不一樣 Object(binary)code incompatibility(不相容)
+      * Program memory bandwidth 需求高
+      * loop unrolling 造成 code bloat(爆炸)
+ * **Intel IA-64 架構**
+     * IA-64 ~ MIPS-64，為利用Reg tp Reg做運算的RISC指令集
+     * Explicitly Parallel Instruction Computer(EPIC):利用Compiler開發的平行度
+     * IA-64 & MIPS 架構差異
+     |            | IA-64                                                                        | MIPS |
+     |:----------:|:----------------------------------------------------------------------------:|:----:|
+     |Register數量|128個整數 + 128個浮點數 + 8個branch + 64個1-bit condition                       |      |
+     |            |將有固定格式並標明相依性的指令裝在一起                                           |      |
+     |            |包含特別指令，有能力做到猜測並且將(部分)branch消除 ⇒ 消除control hazard ⇒ ILP ↑  |      |
+     * IA-64 有VLIW的優點，且比VLIW更有彈性
+     * 兩種獲得彈性的概念
+       * Instruction Group : 一連串沒有Reg Data dependency的指令，足夠硬體 ⇒ 平行執行
+       * Bundle : template field(5-bit) + 3個指令(3*41-bit=123bit) = 128 bits    
+         [註] template field : 5-bit 個別標出bundle要用到的5個執行單元的哪一個  
+         (整數ALU,非整數型ALU,記憶體單元,浮點數單元,Branch處理單元)
+       * Prediction : 利用Condition指令來取代原有的Branch指令來消除Branch ⇒ 消除control hazard ⇒ ILP ↑  
+
+* **Out-of-order Execution
+## 重點十
+### Pipeline Exception Handling
+* **Exception & Interrupt**
+* **Handling Exception**
+* **OS Exception**
+* **Handling Exception Steps**
+* **Imprecise interrupt**
        
+     
+ 
+    
+         
+    
+
     
   
 
