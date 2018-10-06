@@ -1,4 +1,4 @@
-# Enhancing Performance with Pipelining
+## Enhancing Performance with Pipelining
 * [(一)Pipeline](#(一)Pipeline)
 * [(二)Pipeline　datapath](#(二)Pipeline　datapath)
 * [(三)Pipeline　Control Unit](#(三)Pipeline　Control　Unit)
@@ -28,17 +28,16 @@
    * CPI = [(S-1) + N ] / N ,if N → ∞ , CPI = 1
    * Speedup = S × N × T /{ [(S-1) + N ] × T' } , if N → ∞ ,Speedup = S
    * 1個指令花S-1個Clock通過管線，N個指令花(S-1) + N
-## (二)Pipeline　datapath
+### (二)Pipeline　datapath
 ![image](https://user-images.githubusercontent.com/38349902/46470323-c712ed00-c808-11e8-82e7-b41e1719c42a.png)
-## (三)Pipeline　Control　Unit
+### (三)Pipeline　Control　Unit
 ![image](https://user-images.githubusercontent.com/38349902/46472178-ef054f00-c80e-11e8-97d1-a4d41ee9eb8d.png)
-## (四)Pipeline　hazard
+### (四)Pipeline　hazard
 * Structural hazards : 硬體資源不足，同時間內要執行多個指令卻無法執行 (e.g.IF,ME同時使用Single-Memory)
 * Data harzards : 後面的指令需用到前面指令的結果(Data dependency)，但前面指令還在管線中因此無法獲得(指令距離≤2 in 5 stages MIPS pipeline)
 * Control hazards : branch還沒決定要不要跳(之前教的是在MEM決定)，後面的指令已經進入pipeline了(進入IF,ID,EX中)，  
                     如果要跳那執行順序就會錯誤 → 又稱Branch hazards
-## (五)Hazard　Solution
-------
+### (五)Hazard　Solution
 * 3種Hazard皆可藉由暫停管線(Stall)來解決，But Clock Cycle Time ↑ , Performance ↓
 * **Structural hazards**
   * Add Hardware
@@ -59,7 +58,7 @@
   * Hardware  
     * Predict not taken  
     * Flush wrong instruction
-## (六)Data　hazard
+### (六)Data　hazard
 * **Software**    
     * Insert NOP    
       * NOP(No Operation) : 不幹嘛 ⇒ 不影響程式正確性  
@@ -88,7 +87,7 @@
          偵測碼  
          ![image](https://user-images.githubusercontent.com/38349902/46537189-4117a480-c8e3-11e8-9737-e1fba7623333.png)  
          ![image](https://user-images.githubusercontent.com/38349902/46540921-45e15600-c8ed-11e8-8adc-09738a965be5.png)  
-## (七)Data　dependency
+### (七)Data　dependency
 * RAW ( read  after write ) 寫後讀 ( 唯一會在MIPS 2000造成hazard : True data dependecy )  
     ```
     add s0 , s1 , s2  
@@ -104,7 +103,7 @@
     add s0 , s1 , s2  
     sub s0 , t1 , t2  
     ```
-## (八)Control　hazard　(Branch　hazard)
+### (八)Control　hazard　(Branch　hazard)
 * Software (Compiler)  
   * Insert NOP  
             
