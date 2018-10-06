@@ -9,7 +9,7 @@
 * [(八) Control hazard (Branch hazard)]()
 * [横线](#横线)
 
-Pipe
+Pip
 ------
 * **管線化(Pipelining)** 
    * 多個指令重疊執行(Overlap execution)，同一時間平行處理不同Stage's job → 硬體使用率 ↑，throughput ↑
