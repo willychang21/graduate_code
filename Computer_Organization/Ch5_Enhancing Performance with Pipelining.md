@@ -1,15 +1,15 @@
 ## Enhancing Performance with Pipelining
-* [(一) Pipeline](#Pipeline)
+* [(一) Pipeline](#一)
 * [(二) Pipeline datapath](#Pipeline-datapath)
-* [(三) Pipeline Control Unit]()
+* [(三) Pipeline Control Unit](#)
 * [(四) Pipeline hazard](#Pipe)
-* [(五) Hazard Solution]()
-* [(六) Data hazard]()
-* [(七) Data dependency]()
-* [(八) Control hazard (Branch hazard)]()
+* [(五) Hazard Solution](#)
+* [(六) Data hazard](#)
+* [(七) Data dependency](#)
+* [(八) Control hazard (Branch hazard)](#)
 * [横线](#横线)
 
-Pip
+一
 ------
 * **管線化(Pipelining)** 
    * 多個指令重疊執行(Overlap execution)，同一時間平行處理不同Stage's job → 硬體使用率 ↑，throughput ↑
