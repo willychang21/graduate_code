@@ -7,7 +7,7 @@
 * [(六) Data hazard](六)
 * [(七) Data dependency](七)
 * [(八) Control hazard (Branch hazard)](八)
-#### a-b
+#### (一)
 (一) Pipeline
 ------
 * **管線化(Pipelining)** 
