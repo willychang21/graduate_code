@@ -1,12 +1,12 @@
 ## Enhancing Performance with Pipelining
-* [(一) Pipeline](https://github.com/willychang21/CodeWiki/blob/master/Computer_Organization/Ch5_Enhancing%20Performance%20with%20Pipelining.md#%E4%B8%80pipeline)
-* [(二) Pipeline datapath](https://github.com/willychang21/CodeWiki/blob/master/Computer_Organization/Ch5_Enhancing%20Performance%20with%20Pipelining.md#%E4%BA%8C-pipeline-datapath)
-* [(三) Pipeline Control Unit](https://github.com/willychang21/CodeWiki/blob/master/Computer_Organization/Ch5_Enhancing%20Performance%20with%20Pipelining.md#%E5%9B%9Bpipeline-hazard)
-* [(四) Pipeline hazard]()
-* [(五) Hazard Solution](https://github.com/willychang21/CodeWiki/blob/master/Computer_Organization/Ch5_Enhancing%20Performance%20with%20Pipelining.md#%E4%BA%94hazardsolution)
-* [(六) Data hazard](https://github.com/willychang21/CodeWiki/blob/master/Computer_Organization/Ch5_Enhancing%20Performance%20with%20Pipelining.md#%E5%85%ADdatahazard)
-* [(七) Data dependency](https://github.com/willychang21/CodeWiki/blob/master/Computer_Organization/Ch5_Enhancing%20Performance%20with%20Pipelining.md#%E4%B8%83datadependency)
-* [(八) Control hazard (Branch hazard)](https://github.com/willychang21/CodeWiki/blob/master/Computer_Organization/Ch5_Enhancing%20Performance%20with%20Pipelining.md#%E5%85%ABcontrolhazardbranchhazard)
+* [(一) Pipeline]()
+* [(二) Pipeline datapath]()
+* [(三) Pipeline Control Unit]()
+* [(四) Pipeline hazard](#(四)-Pipeline-hazard)
+* [(五) Hazard Solution]()
+* [(六) Data hazard]()
+* [(七) Data dependency]()
+* [(八) Control hazard (Branch hazard)]()
 * [横线](#横线)
 
 (一) Pipeline
