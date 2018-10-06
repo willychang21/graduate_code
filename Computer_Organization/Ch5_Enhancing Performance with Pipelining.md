@@ -1,12 +1,12 @@
 ## Enhancing Performance with Pipelining
-* [(一)Pipeline](#11)
-* [(二)Pipeline　datapath](#34)
-* [(三)Pipeline　Control Unit](#37)
-* [(四) Pipeline hazard](#40)
-* [(五)Hazard　Solution](#(五)Hazard　Solution)
-* [(六)Data　hazard](#(六)Data　hazard)
-* [(七)Data　dependency](#(七)Data　dependency)
-* [(八)Control　hazard　(Branch　hazard)](#(八)Control　hazard　(Branch　hazard))  
+* [(一) Pipeline](#1)
+* [(二) Pipeline datapath](#2)
+* [(三) Pipeline Control Unit](#3)
+* [(四) Pipeline hazard](#4)
+* [(五) Hazard Solution](#5)
+* [(六) Data hazard](#6)
+* [(七) Data dependency](#7)
+* [(八) Control hazard (Branch　hazard)](#8)  
 
 (一)Pipeline
 ------
