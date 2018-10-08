@@ -1,11 +1,11 @@
 # Tree_Binary_Tree
-* [樹](#樹)
+* [Tree](#Tree)
 
 
 
 
 
-## 樹
+## Tree
 * **Def**
     * Tree 為 `nodes ≥ 1` 構成之集合 , Tree不可為空  
 * **術語**
