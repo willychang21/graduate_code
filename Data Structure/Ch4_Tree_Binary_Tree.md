@@ -46,7 +46,55 @@
        * Swap a BT
        * 以BT表示Expression
        * 針對Expression BT寫出求值的recursive algo
-       * 利用
+       * 利用Tree做Sorting
+         * Heap sort
+         * 利用Search Tree作Sort 
+           * m-way Search Tree(n>>2)
+           * Binary Search Tree
+ * **Binary Search Tree(BST)**
+     * Def
+     * 利用BST作Sort
+     * Delete x in a BST
+     * Search x in a BST
+ * **Heap**
+     * Def
+     * 應用
+     * Insert x in Heap
+     * Delete x in Heap
+     * Build Heap
+       * Top-down
+       * Bottom-up
+         * Adjust(tree,i,n)
+         * BuildHeap(tree,n)
+* **Thead BT**
+    * 緣由
+    * Thread pointer指向何處?以中序為準
+    * Data Structure設計
+    * 基本操作
+      * Insuc(x)  
+        InPre(x)
+      * 簡化的Inorder追蹤algo(不用Recursion，無須Stack)
+      * 插入t node in a Tread BT
+* **Tree化成BT**
+* **Forest化BT**
+* **n個nodes可以形成不同結構之BT數
+* **Disjoint Set定義、表示方式、union與Find運作
+    * Def
+    * 應用
+    * 表示方法 
+      * linklist
+      * array
+    * union(i,j)   
+      Find(x)
+    * 三種組合
+      * 任意的union(i,j)與simple-Find(x)
+      * union-bu-Height與Simple-Find(x)之組合
+      * union-by-Height與Find-with-path-compression之組合
+    * 應用 : 給予等位關係配對資訊，求出等位集合
+      
+         
+       
+       
       
   
   
