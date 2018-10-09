@@ -214,7 +214,8 @@
  * **Intel IA-64 架構**
      * IA-64 ~ MIPS-64，為利用Reg tp Reg做運算的RISC指令集
      * Explicitly Parallel Instruction Computer(EPIC):利用Compiler開發的平行度
-     * IA-64 & MIPS 架構差異
+     * IA-64 & MIPS 架構差異  
+     
      |            | IA-64                                                                        | MIPS |
      |:----------:|:----------------------------------------------------------------------------:|:----:|
      |Register數量|128個整數 + 128個浮點數 + 8個branch + 64個1-bit condition                       |      |
@@ -228,7 +229,7 @@
          (整數ALU,非整數型ALU,記憶體單元,浮點數單元,Branch處理單元)
        * Prediction : 利用Condition指令來取代原有的Branch指令來消除Branch ⇒ 消除control hazard ⇒ ILP ↑  
 
-* **Out-of-order Execution
+* **Out-of-order Execution**
 ## 重點十
 ### Pipeline Exception Handling
 * **Exception & Interrupt**
