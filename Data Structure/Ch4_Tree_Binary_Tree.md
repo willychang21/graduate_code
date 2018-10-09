@@ -77,8 +77,8 @@
       * 插入t node in a Tread BT
 * **Tree化成BT**
 * **Forest化BT**
-* **n個nodes可以形成不同結構之BT數
-* **Disjoint Set定義、表示方式、union與Find運作
+* **n個nodes可以形成不同結構之BT數**
+* **Disjoint Set定義、表示方式、union與Find運作**
     * Def
     * 應用
     * 表示方法 
