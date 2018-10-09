@@ -1,0 +1,91 @@
+- **製作Double-ended priority Queue 之 Data Structure**
+  - **Min-Max Heap**
+    - Def
+    - Insert x in Min-Max Heap
+    - Delete-Min in Min-Max Heap
+  - **Deap(Double-ended Heap)**
+    - Def
+    - Insert x in Deap
+    - Delete x in Deap
+  - **SMMH(Symmetric Min-Max Heap)**
+    - Def
+    - Insert x in SMMH
+    - Delete x in SMMH
+- **Extended Binary Tree**
+  -  Def
+  -  有些版本定義
+    - External node ⇒ leaf
+    - Internal node ⇒ Non-leaf
+  -  I:Internal path length &amp; E:External path length
+  -  定理:E = I + 2N , N為內部Node數
+  -  Weighted External Path length (WEPL)
+    - 求min WEPL值
+  - Huffman Algo
+    - Huffman Algo[補充]
+      1. 1]是Optimal prefix code
+      2. 2]是屬於變動長度之編碼方式
+      3. 3][Algo]採取Greedy策略
+  - 應用問題
+    - n 個 Runs 之最佳合併方式 (Ch7 merge sort)
+    - n 個 Message 傳輸(保存)求平均最小的解碼時間之編碼方式(or 平均最小編碼位元長度)
+- **AVL Tree**
+  -  緣由 &amp; 定義
+  -  node&#39;s &quot;Balance Factor&quot; = HL-HR
+  -  AVL之不平衡狀況分為4種 : LL,LR,RL,RR
+    - AVL Tree不平衡狀況之2大調整原則
+      1.  **中間鍵值往上拉** ， **小** 的放左， **大** 的放右，此三點式標示LL,LR,RL,RR所連結的3個點
+      2. 若有 **孤兒之點/子樹** ，就依BST性質擺到正確位置
+  -  AVL Tree定理
+    -形成高度H的ALV Tree所需之最少Node數 = FH+2−1
+    -最多 ⇒ Full = 2H−1
+    - Non-leaf 之左右子樹高度皆差1 ⇒ Fibonacci Binary Tree
+  -  Array , Link List , AVL Tree 比較表
+-  **m-way Search Tree** ( m : Tree degree , m≫2)
+  -  Def
+  -  m-way search tree 高度 = h
+    -最多node數 = mh−1m−1
+    -最多key數 = mh−1
+- **B tree of order m**
+  -  Def
+  -  高度h的B tree of order m
+    -最 **多** node數 = mh−1m−1
+    -最 **多** Data 數 = mh−1
+    -最 **少** node數 = 1+[⌈m2⌉h−1−1⌈m2⌉−1]×2
+    -最 **少** Data 數 = 2×⌈m2⌉h−1−1
+  -  Insert x in B tree of order m
+  -  Delete x in B tree of order m
+- **Red-Black Tree**
+  - DS版Red-Black Tree
+    - Def
+    - 轉換rules
+  -  Algo版
+    - Def
+    - Insert x in Red-Black Tree (Top-down)
+  -  Rotation 調整 in Red-Black Tree
+    - 與AVL Tree rotation 相似
+    - 分為LL,LR,RL,RR rotation
+- **Optimal BST**
+  -  Def
+    - 再有 **加權值** 影響的時候， **不見得** 樹越矮，cost越小
+  -  運用Dynamic Programming技巧來解OBST
+- **Leftist Heap** (or叫 min(MAX) Leftist Tree)
+  -  緣由
+  -  Define
+    - shortest(x) ⇒ Leftist Tree ⇒ Leaftist Heap ⇒ Merge 2 Leaftist Heap
+  -  Delete-Min in leftist Heap
+  - Insert x in leftist Heap : H1
+- **Binomail Heap** ( or Binomial Queue)
+  -  先定義Binomial Tree
+  -  Binomial Tree公式
+    -Bk中第i level 之 Node 數 = (ki)
+    -Bk的Node總數 = 2k
+
+  -  在定義Binomial Heap
+  - Bimomial Heap之相關數學
+  -  Merge 2 Binomial Heap to 1 Binomial Heap
+  -  Delete-min in Binomial Heap
+  -  Insert x in Binomial Heap
+- **Fibonacci Heap**
+  -  Def
+  -  Delete x
+  -  Decrease key of a Node
