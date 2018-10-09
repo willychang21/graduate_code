@@ -2,7 +2,7 @@
 * [Binding](#重點一)
  
 ## 重點一
-
+### Binding
 * **Stactic** ( logical address = physical address )
    * Compiling Time (Compiler) → absolute code
         
