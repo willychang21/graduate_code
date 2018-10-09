@@ -1,7 +1,7 @@
 # Memory Management
-* [Binding](#Binding)
+* [Binding](#B)
  
-## Binding
+## B
 
 * **Stactic** ( logical address = physical address )
    * Compiling Time (Compiler) → absolute code
