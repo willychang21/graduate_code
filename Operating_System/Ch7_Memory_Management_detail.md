@@ -10,7 +10,7 @@
 * [Paged Segment Memory Management (分頁式分段)]
 * [小結]
 
-### PART1
+## PART1
 ## Binding
 * **Binding** : 決定程式在記憶體執行之起始位址
 ![image](https://user-images.githubusercontent.com/38349902/46900926-04e4d500-cedd-11e8-9e0b-98e0afa2aaeb.png)
