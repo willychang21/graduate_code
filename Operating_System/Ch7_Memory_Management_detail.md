@@ -202,7 +202,7 @@ OS 會將 disk 中的資料分割成固定大小的區塊，稱為頁（pages）
   * [4]：Table 數目太多，極佔空間，memory access time 更長。
   * [5]：logical addr 轉 physical addr 過程複雜冗長，memory access time 更長。
 * 圖看筆記
-## 重點一
+## 重點十
 ### 小結
 |     |Contiguous|Paging|Segment|Page Segment|
 |:---:|:--------:|:----:|:-----:|:----------:|
