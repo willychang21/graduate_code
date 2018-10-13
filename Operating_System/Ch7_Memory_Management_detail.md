@@ -84,7 +84,7 @@
  * **Contiguous Allocation 缺點**
      * 均有外部碎裂(External Fragmentation)問題：所有可用空間總和大於某個 process 所需要，但因為此空間不連續所以無法配給該 process 使用，造成            memory 空間閒置。
      * 配置完所剩的極小 Free Blocks 仍會保存在 AV-list 中，徒增 Search Time 與記錄成本。 
- 
+ ## 重點三
  ## Fragmentation
  * **外部碎裂 (External Fragmentation)** ( 空房是夠住的，但空房但都分散開(規定要住旁邊)，造成空屋太多 )
      * **Def** : AV-list 中 all free block size sum ≧ process size，但因為這些空間不連續(in contiguous allcoation)所以無法配給該 process 使                  用，造成 memory 空間閒置。
@@ -97,7 +97,7 @@
          * [1]：Reducing the page size can alleviate Internal Fragmentation.
          * [2]：Enlarging the page size helps to reduce the size of the page table. 
  
-## 重點三
+## 重點四
 ### Paging ( 算是Dynamic Binding )
 OS 會將 disk 中的資料分割成固定大小的區塊，稱為頁（pages）。當不需要時，將分頁由 memory 移到 disk ；當需要時再將資料取回載入 memory 中。分頁是磁   碟和記憶體間傳輸資料塊的最小單位。
 * 實體記憶體 (Physical Memory)：視為一組頁框(Frame)之集合。各頁框的大小均相等。
@@ -127,7 +127,7 @@ OS 會將 disk 中的資料分割成固定大小的區塊，稱為頁（pages）
   * [3]：需要額外的Hardware支援
     * Page table 製作 → 用 TLB
     * logical address 轉 physical address → MMU
-## 重點四    
+## 重點五    
 ### Page Table 的製作 (保存)
 * [方法1] 使用 register 保存 Page table 每個項目(entry)的內容
   * 優點 : 存取速度快 (i.e. 查 Page table fast ∵不須 memory access) 
@@ -139,12 +139,12 @@ OS 會將 disk 中的資料分割成固定大小的區塊，稱為頁（pages）
 ![image](https://user-images.githubusercontent.com/38349902/46902413-bb55b380-cef7-11e8-8902-c709066efb2d.png)  
    *  TLB 的 Effective Access Time (EAT) 計算 ( P : TLB Hit ratio )
    ![image](https://user-images.githubusercontent.com/38349902/46902485-d7a62000-cef8-11e8-8c8e-11d1c79f7d95.png)
-## 重點五
+## 重點六
 ### Paging 之相關計算
 * [型一] 使用 TLB 之 Effective Access Time (EAT)
 * [型二] logical address & physical address 之 length ( or bits 數 )
 * [型三] " Page Table " size 相關
-## 重點六
+## 重點七
 ### Structure of Page Table   
 目的：page table size 太大太稀疏的解決方法。
 * [方法1] Multilevel paging (多層的分頁)
