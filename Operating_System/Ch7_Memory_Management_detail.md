@@ -1,5 +1,15 @@
 # Memory Management
 * [Binding](#Binding)
+* [Contiguous Memory Allocation](#67)
+* [Fragmentation]
+* [Paging]
+* [Page Table 的製作]
+* [Paging 之相關計算]
+* [Structure of Page Table]
+* [Segment Memory Management (Segmentation)]
+* [Paged Segment Memory Management (分頁式分段)]
+* [小結]
+
 
 ## Binding
 * **Binding** : 決定程式在記憶體執行之起始位址
@@ -143,12 +153,12 @@ OS 會將 disk 中的資料分割成固定大小的區塊，稱為頁（pages）
      * level-2 Page Table 就有 2^x 個 entry ，每個 entry 存 frame No.
   * 缺點 : effective memory access time 更久
 * [方法2] Hashing Page Table (雜湊)
-  * Def : 將 Page Table 視為 Hash Table ，具有相同的 Hashing address 之 Page No.(及其 frame No.)會被置入 Page Table 同一個 entry ( or Bucket           )中，且用 link list 串聯，而 list 中之 Node structure 為  
+  * Def : 將 Page Table 視為 Hash Table ，具有相同的 Hashing address 之 Page No.(及其 frame No.)會被置入 Page Table 同一個 entry ( or Bucket )中，且用 link list 串聯，而 list 中之 Node structure 為  
   ![image](https://user-images.githubusercontent.com/38349902/46903395-b4826d00-cf06-11e8-8ac1-c81e788d47e8.png)  
   將來，先將 Page No. 用 Hashing function 算出 Hashing address ，再到對應的 entry 之 link list 進行 search ，找到符合的 Page No. 即可取得 its   frame No.
   ![image](https://user-images.githubusercontent.com/38349902/46903516-b77e5d00-cf08-11e8-9d76-6bd1448059ac.png)
 * [方法3] Invert Page Table (反轉分頁表)
-  * Def : 以 physical memory 為紀錄對象，建立一個 global page table 給所有 process (若有 n 個frames，則 Invert Page Table 就有 n 個 entry )             ，每個 entry 記錄 <Process id, Page No>，意思是這個 frame 被哪個 process 的哪個 page 所佔用
+  * Def : 以 physical memory 為紀錄對象，建立一個 global page table 給所有 process (若有 n 個frames，則 Invert Page Table 就有 n 個 entry )，每個 entry 記錄 <Process id, Page No>，意思是這個 frame 被哪個 process 的哪個 page 所佔用
   * 優點 : 大幅降低 page table size 
   * 缺點
     * [1]：searching invert page table 耗時(∵需用<Process id, Page No>一一比對)，可用 hash 增加搜尋速度
