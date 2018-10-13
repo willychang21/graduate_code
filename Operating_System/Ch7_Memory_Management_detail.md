@@ -1,14 +1,14 @@
 # Memory Management
-* [Binding](#重點一)
-* [Contiguous Memory Allocation](#67)
-* [Fragmentation]
-* [Paging]
-* [Page Table 的製作]
-* [Paging 之相關計算]
-* [Structure of Page Table]
-* [Segment Memory Management (Segmentation)]
-* [Paged Segment Memory Management (分頁式分段)]
-* [小結]
+* [重點一 : Binding](#重點一)
+* [重點二 : Contiguous Memory Allocation](#重點二)
+* [重點三 : Fragmentation](#重點三)
+* [重點四 : Paging](#重點四)
+* [重點五 : Page Table 的製作](#重點五)
+* [重點六 : Paging 之相關計算](#重點六)
+* [重點七 : Structure of Page Table](#重點七)
+* [重點八 : Segment Memory Management (Segmentation)](#重點八)
+* [重點九 : Paged Segment Memory Management (分頁式分段)](#重點九)
+* [重點十 : 小結](#重點十)
 
 ## 重點一
 ### Binding
@@ -63,8 +63,8 @@
       * [2]：拖長執行時間 → Performance 差 ( ∵ 停下來等 I/O )
       * [3]：dynamic loading 是古老的方法，e.g. MS-DOS Overlay files
  
- 
- ## Contiguous Memory Allocation
+ ## 重點二
+ ### Contiguous Memory Allocation
  * **Def** : process 必須佔用連續的 memory space ， OS 依據各個 Process 的大小找到一塊夠大的連續可用的記憶體，配置給該 process 使用
  * **Partition** : process 所佔用的 memory spcae ， 由於 process 大小不一 ， 且 process 數目也多變 ， 因此每個 process size 不一定相同 ，且                      partition 數目也不固定  
                    [註] 早期也可採用固定大小，固定數目之partition
@@ -96,8 +96,9 @@
      * **解決方法**
          * [1]：Reducing the page size can alleviate Internal Fragmentation.
          * [2]：Enlarging the page size helps to reduce the size of the page table. 
-         
-## Paging ( 算是Dynamic Binding )
+ 
+## 重點三
+### Paging ( 算是Dynamic Binding )
 OS 會將 disk 中的資料分割成固定大小的區塊，稱為頁（pages）。當不需要時，將分頁由 memory 移到 disk ；當需要時再將資料取回載入 memory 中。分頁是磁   碟和記憶體間傳輸資料塊的最小單位。
 * 實體記憶體 (Physical Memory)：視為一組頁框(Frame)之集合。各頁框的大小均相等。
 * 邏輯記憶體 (Logical Memory)：即 User Program 。視為一組頁面(Page)的集合。Page size = Frame size。 
@@ -126,8 +127,8 @@ OS 會將 disk 中的資料分割成固定大小的區塊，稱為頁（pages）
   * [3]：需要額外的Hardware支援
     * Page table 製作 → 用 TLB
     * logical address 轉 physical address → MMU
-    
-## Page Table 的製作 (保存)
+## 重點四    
+### Page Table 的製作 (保存)
 * [方法1] 使用 register 保存 Page table 每個項目(entry)的內容
   * 優點 : 存取速度快 (i.e. 查 Page table fast ∵不須 memory access) 
   * 缺點 : 僅適用於 page table 大小較小的情況，太大的 page table 則不適用。 
@@ -138,12 +139,13 @@ OS 會將 disk 中的資料分割成固定大小的區塊，稱為頁（pages）
 ![image](https://user-images.githubusercontent.com/38349902/46902413-bb55b380-cef7-11e8-8902-c709066efb2d.png)  
    *  TLB 的 Effective Access Time (EAT) 計算 ( P : TLB Hit ratio )
    ![image](https://user-images.githubusercontent.com/38349902/46902485-d7a62000-cef8-11e8-8c8e-11d1c79f7d95.png)
-## Paging 之相關計算
+## 重點五
+### Paging 之相關計算
 * [型一] 使用 TLB 之 Effective Access Time (EAT)
 * [型二] logical address & physical address 之 length ( or bits 數 )
 * [型三] " Page Table " size 相關
-
-## Structure of Page Table   
+## 重點六
+### Structure of Page Table   
 目的：page table size 太大太稀疏的解決方法。
 * [方法1] Multilevel paging (多層的分頁)
   * Def : 不要一次把全部的 Page Table 都載入到 memory ，而是抓取部分(抓 1 個 Page)所需的 Page Table 內容到 Memory ，做查詢即可 ，如此可節省               Memory Space
@@ -164,8 +166,8 @@ OS 會將 disk 中的資料分割成固定大小的區塊，稱為頁（pages）
     * [1]：searching invert page table 耗時(∵需用<Process id, Page No>一一比對)，可用 hash 增加搜尋速度
     * [2]：無法支援 memory sharing
   ![image](https://user-images.githubusercontent.com/38349902/46903637-43dd4f80-cf0a-11e8-98a9-99fd36c27c1f.png)
-
-## Segment Memory Management (Segmentation)
+## 重點八
+### Segment Memory Management (Segmentation)
 * " Physical " memory 視為一個連續可用的 memory space ( 如同前述的 Contiguous Memory Allocations )
 * " Logical " memory ( i.e. user process ) 視為一些段 (Segment) 的集合，各段大小不一定相同
    * segement 是 logical viewpoint (與User對Memory看法一致) ←→ Page 是 Physical viewpoint(與User對Memory看法不一致)
@@ -189,8 +191,8 @@ OS 會將 disk 中的資料分割成固定大小的區塊，稱為頁（pages）
   * [3]：Effective Memory Access Time 更久 (∵檢查 d < limit )
 * paging 和 segment 的比較  
   ![image](https://user-images.githubusercontent.com/38349902/46904515-aee15300-cf17-11e8-962b-3a46edbf0767.png)
-
-## Paged Segment Memory Management (分頁式分段)
+## 重點九
+### Paged Segment Memory Management (分頁式分段)
 * 緣由 : 希望保留 Segment 之 " logical " viewpoint 的好處 ( e.g. protection 容易 ) ，又想解決 External fragmentation
 * 原則 : 先分段(Segment)、再分頁(Paging)。user program 由一組 segment 所組成，而每個段由一組 page 所組成。每個 process 會有一個 segment table，          而每個段會有一個 page table。
 * 分析 
@@ -200,8 +202,8 @@ OS 會將 disk 中的資料分割成固定大小的區塊，稱為頁（pages）
   * [4]：Table 數目太多，極佔空間，memory access time 更長。
   * [5]：logical addr 轉 physical addr 過程複雜冗長，memory access time 更長。
 * 圖看筆記
-
-## 小結
+## 重點一
+### 小結
 |     |Contiguous|Paging|Segment|Page Segment|
 |:---:|:--------:|:----:|:-----:|:----------:|
 |內碎 |√|×|√|×|
