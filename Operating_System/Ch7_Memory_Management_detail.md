@@ -9,6 +9,7 @@
        * 缺點：若所決定的位址內有其它的程式在執行，或之後要變更程式執行的起始位址，則須 recompile。
         
    * **Loading Time** (linking loader) → 如果編譯時不能確定程式所在的記憶體位置，則必須生成relocatable code
+     * 優點 : 更程式執行的起始位址不須 recompile。
      * 缺點 
        * execution time 沒有被呼叫到的模組仍需事先 linking, Allocation, Loading，浪費時間也浪費記憶體。 (e.g. if-else 的程序、OS 錯誤處理程序。)
        * 程式執行期間仍不可以改變起始位址。
@@ -136,7 +137,75 @@ OS 會將 disk 中的資料分割成固定大小的區塊，稱為頁（pages）
 目的：page table size 太大太稀疏的解決方法。
 * [方法1] Multilevel paging (多層的分頁)
   * Def : 不要一次把全部的 Page Table 都載入到 memory ，而是抓取部分(抓 1 個 Page)所需的 Page Table 內容到 Memory ，做查詢即可 ，如此可節省               Memory Space
-  * 作法 : 將 Page Table 做 Paging ， 也就是做成 Mutilevel Paging
+  * 作法 : 將 Page Table 做 Paging ， 也就是做成 Mutilevel Paging  
+  ![image](https://user-images.githubusercontent.com/38349902/46902951-8f8afb80-cf00-11e8-8747-e8f2a5339d82.png)    
+     * level-1 Page Table 就有 2^x 個 entry ，每個 entry 存某個 level-2 Page Table 之位址/pointer 
+     * level-2 Page Table 就有 2^x 個 entry ，每個 entry 存 frame No.
+  * 缺點 : effective memory access time 更久
+* [方法2] Hashing Page Table (雜湊)
+  * Def : 將 Page Table 視為 Hash Table ，具有相同的 Hashing address 之 Page No.(及其 frame No.)會被置入 Page Table 同一個 entry ( or Bucket           )中，且用 link list 串聯，而 list 中之 Node structure 為  
+  ![image](https://user-images.githubusercontent.com/38349902/46903395-b4826d00-cf06-11e8-8ac1-c81e788d47e8.png)  
+  將來，先將 Page No. 用 Hashing function 算出 Hashing address ，再到對應的 entry 之 link list 進行 search ，找到符合的 Page No. 即可取得 its   frame No.
+  ![image](https://user-images.githubusercontent.com/38349902/46903516-b77e5d00-cf08-11e8-9d76-6bd1448059ac.png)
+* [方法3] Invert Page Table (反轉分頁表)
+  * Def : 以 physical memory 為紀錄對象，建立一個 global page table 給所有 process (若有 n 個frames，則 Invert Page Table 就有 n 個 entry )             ，每個 entry 記錄 <Process id, Page No>，意思是這個 frame 被哪個 process 的哪個 page 所佔用
+  * 優點 : 大幅降低 page table size 
+  * 缺點
+    * [1]：searching invert page table 耗時(∵需用<Process id, Page No>一一比對)，可用 hash 增加搜尋速度
+    * [2]：無法支援 memory sharing
+  ![image](https://user-images.githubusercontent.com/38349902/46903637-43dd4f80-cf0a-11e8-98a9-99fd36c27c1f.png)
+
+## Segment Memory Management (Segmentation)
+* " Physical " memory 視為一個連續可用的 memory space ( 如同前述的 Contiguous Memory Allocations )
+* " Logical " memory ( i.e. user process ) 視為一些段 (Segment) 的集合，各段大小不一定相同
+   * segement 是 logical viewpoint (與User對Memory看法一致) ←→ Page 是 Physical viewpoint(與User對Memory看法不一致)
+     * e.g Code segement , Data segement , Stack segement
+     ![image](https://user-images.githubusercontent.com/38349902/46903987-f82da480-cf0f-11e8-89f2-3096c5932489.png)
+* O.S 配置 Memory 原則
+  * [1]：segement & segement 之間可以是非連續性配置
+  * [2]：但就單一 segement 而言，每個 segement 要佔用連續的 memory space
+* O.S 會替每個 process 建立 Segement Table ，紀錄各 segements 之 limit & base 
+  * 用 Segment-table length register (STLR) 記錄各段的大小(Limit)。
+  * 用 Segment-table base register (STBR) 紀錄各段載入記憶體的起始位址(Base)。  
+  ![image](https://user-images.githubusercontent.com/38349902/46904446-c4a24880-cf16-11e8-8d7d-ec168a7453ce.png)
+* 優點
+  * [1]：無 Internal fragmentation。
+  * [2]：可支援 memory sharing 和 protection，且比 paging 容易實施(有的Page可能會涵蓋到不同需求的程式片段)。
+  * [3]：可支援 dynamic loading,linking 及 virtual memory 的製作。
+  * [4]：segmentation 和 page 為兩獨立觀念，可同時使用
+* 缺點
+  * [1]：有 External fragmentation (但 segments 很少 allocated/de-allocated 所以還好)
+  * [2]：需要額外硬體的支援。(e.g. Segment Table 製作 ， logical addr 轉 physical addr )
+  * [3]：Effective Memory Access Time 更久 (∵檢查 d < limit )
+* paging 和 segment 的比較  
+  ![image](https://user-images.githubusercontent.com/38349902/46904515-aee15300-cf17-11e8-962b-3a46edbf0767.png)
+
+## Paged Segment Memory Management (分頁式分段)
+* 緣由 : 希望保留 Segment 之 " logical " viewpoint 的好處 ( e.g. protection 容易 ) ，又想解決 External fragmentation
+* 原則 : 先分段(Segment)、再分頁(Paging)。user program 由一組 segment 所組成，而每個段由一組 page 所組成。每個 process 會有一個 segment table，          而每個段會有一個 page table。
+* 分析 
+  * [1]：保有 Segment 之 logical viewpoint (與User對Memory看法一致)
+  * [2]：無 External fragmentation problem 
+  * [3]：仍有 Internal fragmentation problem (因為最終仍是分頁)
+  * [4]：Table 數目太多，極佔空間，memory access time 更長。
+  * [5]：logical addr 轉 physical addr 過程複雜冗長，memory access time 更長。
+* 圖看筆記
+
+## 小結
+|     |Contiguous|Paging|Segment|Page Segment|
+|:---:|:--------:|:----:|:-----:|:----------:|
+|內碎 |√|×|√|×|
+|外碎 |×|√|×|√|
+
+  
+### References
+http://mropengate.blogspot.com/2015/01/operating-system-ch8-memory-management.html
+  
+  
+ 
+    
+    
+  
 
  
 
