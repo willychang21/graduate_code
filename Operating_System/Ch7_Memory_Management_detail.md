@@ -123,7 +123,22 @@ OS 會將 disk 中的資料分割成固定大小的區塊，稱為頁（pages）
 * [方法2] 使用 memory 保存 Page table，OS 利用 PTBR(Page Table Base Register) 記錄其在 memory 的起始位址，PTLR(Page-table length register)             紀錄 page table size 
   * 優點 : 適用於 page table size 較大之情況 
   * 缺點 : 速度慢。因為需要存取兩次 memory。(一次用於存取 page table、一次用於真正的資料存取) 
-* [方法3] 使用 TLB(Transaction Lookaside Buffer register)(或叫 Association Registers) 保存部份常用的 Page table，完整的 page table 在 memory           中，TLB 是 full associate cache。
+* [方法3] 使用 TLB(Transaction Lookaside Buffer register)(或叫 Association Registers) 保存部份常用的 Page table，完整的 page table 在 memory           中，TLB 是 full associate cache。  
+![image](https://user-images.githubusercontent.com/38349902/46902413-bb55b380-cef7-11e8-8902-c709066efb2d.png)  
+   *  TLB 的 Effective Access Time (EAT) 計算 ( P : TLB Hit ratio )
+   ![image](https://user-images.githubusercontent.com/38349902/46902485-d7a62000-cef8-11e8-8c8e-11d1c79f7d95.png)
+## Paging 之相關計算
+* [型一] 使用 TLB 之 Effective Access Time (EAT)
+* [型二] logical address & physical address 之 length ( or bits 數 )
+* [型三] " Page Table " size 相關
+
+## Structure of Page Table   
+目的：page table size 太大太稀疏的解決方法。
+* [方法1] Multilevel paging (多層的分頁)
+  * Def : 不要一次把全部的 Page Table 都載入到 memory ，而是抓取部分(抓 1 個 Page)所需的 Page Table 內容到 Memory ，做查詢即可 ，如此可節省               Memory Space
+  * 作法 : 將 Page Table 做 Paging ， 也就是做成 Mutilevel Paging
+
+ 
 
   
  
