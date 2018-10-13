@@ -37,7 +37,7 @@
   Physical address : Memory → Physical address (Hareware site e.g RAM) → Physical address space
   ![image](https://user-images.githubusercontent.com/38349902/46900901-84be6f80-cedc-11e8-8b2e-c385f62f8e1a.png)
 * **Static link** → Compile 時 library 就加入程式碼(好幾個程式都#include <stdio.h>，就會有好幾份程式碼分布在記憶體當中，很冗)
-* **Dynamic linking** → call module 後 ，load + link(好幾個程式都#include <stdio.h>，只load一份，大家共用(Share library) 。
+* **Dynamic linking** → call module 後 ，load + link(好幾個程式都#include <stdio.h>，只load一份，大家共用(Share library)
     * **Def** : module 間的 External symbol reference (外部符號參考)之工作，延到 execution time 才做，即不事先
 　　　          linking，而是在 execution time 時等某個 module 被 call 時，才 load 進 main memory 中並與其他 modules 
     　　        進行 linking 修正  
