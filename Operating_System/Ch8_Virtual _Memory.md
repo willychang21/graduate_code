@@ -7,6 +7,8 @@
    * [FIFO](#ＦＩＦＯ)
    * [OPT](#ＯＰＴ)
    * [LRU](#ＬＲＵ)
+   * [LRU近似法則](#ＬＲＵ近似法則)
+   * [LRU & MFU](#ＬＲＵ＆ＭＦＵ)
 * [重點六 : Paging 之相關計算](#重點六)
 * [重點七 : Structure of Page Table](#重點七)
 * [重點八 : Segment Memory Management (Segmentation)](#重點八)
@@ -89,8 +91,62 @@
   * [3] 無法實作出，因為是看未來！不過可以知道 upper bound。
 #### ＬＲＵ
 * Def : 以最近不常使用的 page 視為 victim page。
+* 分析
+  * [1] 效果不錯，Page fault ratio尚可接受
+  * [2] 具備 Stack Property ⇒ 不會有 Belady Anomaly
+  * [3] 製作成本高，需要大量硬體支援(如:需要Counter或Stack) 
+* LRU製作方法
+  * [1] Counter
+    * Def : 利用 Counter 作一個 logical timer，當發生 memory acess 時
+      * (1) counter ++ (時鐘往前進)
+      * (2) copy counter 值到參考 page 之 " the last reference time " 欄位，將來挑 the last reference time 最小的 page (離現在最久)，及為 LRU             page
+  * [2] Stack 
+    * Def : 目前最近的參考 page 會被置於 Stack 的 Top 端，而 Stack 之 Bottom 端，即為 LRU page，而 Stack size = frame 數目
+ #### ＬＲＵ近似法則
+ 由於 LRU 製作成本過高，因此產生以下方法近似 LRU 效果。這些近似方法都有可能退化成 FIFO，會遇到 Belady 異常情況。
+ * 基礎 : 在 Page Table 中多加一個欄位 : " Reference Bit " 代表 Page 有無被參考過(R.W)
+   * 1 : 有
+   * 0 : 無
+   * MMU : set ( 0 → 1 )
+   * O.S : reset ( 1 → 0 ) & reference
+ * [法一] Addition Reference Bit Usage
+   * 作法 : 每個 Page 皆有一個 register (e.g. 8 bits )，保存此 Page 最近幾次的 reference bit 值，每隔一段時間系統會
+     * (1) 將 Page 的 reg. 均右移一位(最右元捨去，空出左位元)
+     * (2) copy 每個 page 之 ref. bit 到 reg. 的最左位元 (剛空出來的)
+     * (3) page 之 ref. bit 值 reset 0
+     * (4) 將來要挑選 victim page 時，挑 reg.值(unsigned)最小的 page 為 victim 若有多個 page 具相同值，以 FIFO 為準
+ * [法二] Second Chance ( Clock algo )
+   * 作法 : 以 FIFO 法則為基礎，搭配 Reference Bit 使用。
+     * (1) 先以 FIFO order 選出一個 Page
+     * (2) check 此 Page 的 reference bit (每個 page 的初始值 reference bit 值設為 1)
+       * 若為 1
+         * (i) 給他機會 (不挑他為 Victim )
+         * (ii) ref. bit 清為 0
+         * (iii) 改它的 loading time 為現在時間
+         * (iv) goto (1)
+       * 若為 0 : 則它是 Victim Page
+ * [法三] Enhance Second Chance
+   * 作法 : 以 < Reference Bit, Modification Bit > 作為挑 Victim Page 依據，值最小的 Page 作為 Victim，若多個 Page 具相同值，則以 FIFO 為主
 
-    
+#### ＬＲＵ＆ＭＦＵ
+       
+ 
+
+
+
+
+
+
+
+
+
+|                  |  FIFO  |    OPT   |     LRU    | LRU&MFU |
+|:----------------:|:------:|:--------:|:----------:|:-------:|
+| Page fault ratio | 相當高 |   最低   |  尚可接受  |   很高  |
+|       效果       |  不好  |   最佳   |    還行    |   不好  |
+|  Stack Property  |    ×   |     √    |      √     |    ×    |
+|  Belady Anomaly  |    √   |     ×    |      ×     |    √    |
+|       NOTE       |        | 無法實作 | 硬體成本高 |  成本高 |
   
 
   
