@@ -4,7 +4,7 @@
 * [重點三 : Effective Access Time & Page fault ratio](#重點三)
 * [重點四 : Page Replacement](#重點四)
 * [重點五 : Page Replacement algo.](#重點五)
-   * [FIFO](#FIFO)
+   * [ＦＩＦＯ](#ＦＩＦＯ)
 * [重點六 : Paging 之相關計算](#重點六)
 * [重點七 : Structure of Page Table](#重點七)
 * [重點八 : Segment Memory Management (Segmentation)](#重點八)
@@ -70,7 +70,7 @@
     
 ## 重點五
 ### Page Replacement algo.
-#### FIFO
+#### ＦＩＦＯ
 
     
   
