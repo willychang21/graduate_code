@@ -2,8 +2,9 @@
 * [重點一 : Virtual Memory](#重點一)
 * [重點二 : Demand Paging](#重點二)
 * [重點三 : Effective Access Time & Page fault ratio](#重點三)
-* [重點四 : Paging](#重點四)
-* [重點五 : Page Table 的製作](#重點五)
+* [重點四 : Page Replacement](#重點四)
+* [重點五 : Page Replacement algo.](#重點五)
+   * [FIFO](#FIFO)
 * [重點六 : Paging 之相關計算](#重點六)
 * [重點七 : Structure of Page Table](#重點七)
 * [重點八 : Segment Memory Management (Segmentation)](#重點八)
@@ -43,6 +44,37 @@
   * [2] Frame 數分配多寡之影響
   * [3] Page size 之影響
   * [4] Program Structure 之影響
+
+## 重點四
+### Page Replacement
+* Def : 當 page fault 發生且 memory 無可用 frame 時，則 OS 必須執行 page replacement。OS 必須選擇一個 victim page，將其 swap out 到 disk 來空         出一個 free frame，再將 missed page swap in 到此 frame。
+![image](https://user-images.githubusercontent.com/38349902/46912343-7be5a080-cfa5-11e8-92f9-5dae7a597c0d.png)
+* swap out 和 swap in 分別是 2 個 disk I/O 的動作 → Page process time 更長。
+* swap in 是必要的，一定要將 missed page 置入到 memory 中。
+* 解法 : 引入 dirty bit ( Modification bit ) 到 Page Table 決定是否 swap out
+* dirty bit
+  * 用於表示 victim page 是否曾被修改過 
+    * 0 : 沒有 ⇒ 不須被 swap out，省下此次 I/O 
+    * 1 : 有 ⇒ swap out
+    * MMU : set ( 0 → 1 )
+    * O.S : reset ( 1 → 0 ) & reference
+* Page Replacement policy
+  * Local Replacement 
+    * Def : O.S 在 select victim page 時，只能從該 process 之 frames 中挑選
+    * 優點 : 降低 thrashing 機率
+    * 缺點 : Memory utilization 較差 ( 其他 process 有 free frame 卻不能用 )
+  * Global Replacement 
+    * Def :　O.S 在 select victim page 時，能挑選其他 process 之 page 
+    * 優點 : Memory utilization 較好
+    * 缺點 : 提高 thrashing 機率
+    
+## 重點五
+### Page Replacement algo.
+#### FIFO
+
+    
+  
+
   
   
   
