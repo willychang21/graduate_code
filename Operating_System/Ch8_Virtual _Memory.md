@@ -147,7 +147,31 @@
 |  Stack Property  |    ×   |     √    |      √     |    ×    |
 |  Belady Anomaly  |    √   |     ×    |      ×     |    √    |
 |       NOTE       |        | 無法實作 | 硬體成本高 |  成本高 |
-  
+
+## 重點六
+### Page Buffering 機制
+* 緣由 : Page fault 發生且要做 Page Replacement，且 the victim page has been modified，then
+  * (1) 要先把 victim page 寫回 disk
+  * (2) 才載入 missed page
+  * (3) process can resume execution
+    * 上述流程，會導致 process restart later
+    * 希望可以加速，讓 process restart exec. as soon as possible
+* 解法 
+一般 O.S 分配給 process 之 pages(frame) 稱 " resident pages "
+  * [法一] O.S 會建一個 " Free Frame Pool " 保有一些 Frames，這些 Frames 並不是拿來配置給 Process 用，而是用來當 O.S 的周轉金(私房錢)
+    ![image](https://user-images.githubusercontent.com/38349902/46913490-5fa32d00-cfc0-11e8-8bbe-870d28012795.png)
+  * [法二] O.S 會保存一條串列 " Modifued Pages List "，紀錄 Modification 
+    * Bit 為 1 之 Pages，只要 I/O 設備一有空，O.S 就將此串列中的一些 modified pages 寫回 disk，然後 reset modification bit 為 0，如此一來未來挑       victim page 時，挑出的 page 是 unmodified 的機會大增，因此也可縮短 process restart exec. time
+  * [法三] 把[法一]進一步改良
+    * 針對 free frame pool 中所有的 free frame，紀錄是哪個 process 的哪個 page 放在 free frame 中，因為他們均是 " the recent updated content "，而流程修改如下
+    ![image](https://user-images.githubusercontent.com/38349902/46913571-6e8adf00-cfc2-11e8-9c60-9383df362da5.png)
+
+## 重點七
+### Free Frame 分配多寡對 page fault ratio 之影響
+* 一般來說，Process所分配到的 frame 愈多，則 page fault ratio 愈低。 
+* O.S 在分配 Process Frame 時，數目有最少數目與最大數目的限制，此兩類數目限制均取決於 Hardware 因素。
+  * 最大數目的限制：由 physical memory size 決定 
+  * 
 
   
   
