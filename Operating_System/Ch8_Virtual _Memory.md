@@ -200,7 +200,7 @@ copy-on-write (COW) 是一種最佳化策略，在 copy-on-write 策略中如果
 * 一般來說，Process所分配到的 frame 愈多，則 page fault ratio 愈低。 
 * O.S 在分配 Process Frame 時，數目有最少數目與最大數目的限制，此兩類數目限制均取決於 Hardware 因素。
   * 最大數目的限制：由 physical memory size 決定 
-  * 最少數目的限制：由機器指令結構決定，必須能讓任何一個機器指令順利執行完成，即機器指令執行過程中，Memory Access可能之最多次數。
+  * 最少數目的限制：由機器指令結構決定，必須能讓任何一個機器指令順利執行完成，即機器指令執行過程中，Memory Access可能之最多次數。  
   　 * e.g. IF - ID - EX - MEM - WB 中，IF 必有記憶體存取，MEM、WB可能有必有記憶體存取，因此最少的 frame 數目為 3。
 
 ## 重點八
