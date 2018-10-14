@@ -37,7 +37,7 @@
   * I : 不在 Memory 
   * O.S : set & change 
   * MMU : reference only ( MMU 發出 interrupt )
-  ![image](https://user-images.githubusercontent.com/38349902/46906980-540f2200-cf3e-11e8-9857-cf6e5b0d5545.png)
+![image](https://user-images.githubusercontent.com/38349902/46906980-540f2200-cf3e-11e8-9857-cf6e5b0d5545.png)
  
 ## 重點三
 ### Effective Access Time (EAT) in Vertual Memory & Page fault ratio 
@@ -164,7 +164,7 @@
     * Bit 為 1 之 Pages，只要 I/O 設備一有空，O.S 就將此串列中的一些 modified pages 寫回 disk，然後 reset modification bit 為 0，如此一來未來挑       victim page 時，挑出的 page 是 unmodified 的機會大增，因此也可縮短 process restart exec. time
   * [法三] 把[法一]進一步改良
     * 針對 free frame pool 中所有的 free frame，紀錄是哪個 process 的哪個 page 放在 free frame 中，因為他們均是 " the recent updated content "，而流程修改如下
-    ![image](https://user-images.githubusercontent.com/38349902/46913571-6e8adf00-cfc2-11e8-9c60-9383df362da5.png)
+![image](https://user-images.githubusercontent.com/38349902/46913571-6e8adf00-cfc2-11e8-9c60-9383df362da5.png)
 
 ## 重點七
 ### Free Frame 分配多寡對 page fault ratio 之影響
@@ -184,15 +184,15 @@
   * 結果 
     * [1] CPU utilization 急速下降
     * [2] I/O-Device 異常忙碌
-    * [3] Process 花在 Page fault process time >> 正常 exec. time
-    ![image](https://user-images.githubusercontent.com/38349902/46914020-65057500-cfca-11e8-8496-6837965722ae.png)
+    * [3] Process 花在 Page fault process time >> 正常 exec. time  
+![image](https://user-images.githubusercontent.com/38349902/46914020-65057500-cfca-11e8-8496-6837965722ae.png)
 * Thrashing的解決方法：
   * [法一] 降低 Multiprogramming degree
   * [法二] 利用 Page Fault Frequency Control 機制來防止 thrashing
     * 作法 : OS 規定合理的 page fault ratio 之上限與下限值，把 ratio 控制在一個合理範圍內。 
       * case 1 : page fault ratio > 上限值 → OS 應多分配額外的 frame 給該 process。 
-      * case 2 : page fault ratio < 下限值 → OS 應從該 process 取走多餘的 frame，以分配給其它有需要的 process。
-      ![image](https://user-images.githubusercontent.com/38349902/46914097-8d41a380-cfcb-11e8-91f5-726c28fe4cbc.png)
+      * case 2 : page fault ratio < 下限值 → OS 應從該 process 取走多餘的 frame，以分配給其它有需要的 process。  
+![image](https://user-images.githubusercontent.com/38349902/46914097-8d41a380-cfcb-11e8-91f5-726c28fe4cbc.png)
   * [法三] 利用 [Working Set Model](重點九)預估各 process 在不同執行時期所需的 frame 數目，並依此提供足夠的 frame 以防止thrashing。
   
 ## 重點九
