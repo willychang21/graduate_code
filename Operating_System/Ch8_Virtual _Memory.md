@@ -9,6 +9,7 @@
    * [LRU](#ＬＲＵ)
    * [LRU近似法則](#ＬＲＵ近似法則)
    * [LRU & MFU](#ＬＲＵ與ＭＦＵ)
+   * [比較表](#比較表)
 * [重點六 : Paging 之相關計算](#重點六)
 * [重點七 : Structure of Page Table](#重點七)
 * [重點八 : Segment Memory Management (Segmentation)](#重點八)
@@ -129,17 +130,16 @@
    * 作法 : 以 < Reference Bit, Modification Bit > 作為挑 Victim Page 依據，值最小的 Page 作為 Victim，若多個 Page 具相同值，則以 FIFO 為主
 
 #### ＬＲＵ與ＭＦＵ
-       
- 
+* Def : 以 Page 的累計參考次數最為挑 Victim Page 的依據，分為兩種
+  * [1] LFU : Least Frequently Used (參考次數最小者)
+  * [2] MFU : Most Frequently Used (參考次數最多者)
+    * 若有多個　Page 具相同值，以 FIFO 為準
+* 分析
+  * [1] 效果不好，page fault ratio 很高
+  * [2] 遭遇 Belady Anomaly
+  * [3] 製作成本高
 
-
-
-
-
-
-
-
-
+#### 比較表       
 |                  |  FIFO  |    OPT   |     LRU    | LRU&MFU |
 |:----------------:|:------:|:--------:|:----------:|:-------:|
 | Page fault ratio | 相當高 |   最低   |  尚可接受  |   很高  |
