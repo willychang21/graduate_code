@@ -10,10 +10,10 @@
    * [LRU近似法則](#ＬＲＵ近似法則)
    * [LRU & MFU](#ＬＲＵ與ＭＦＵ)
    * [比較表](#比較表)
-* [重點六 : Paging 之相關計算](#重點六)
-* [重點七 : Structure of Page Table](#重點七)
-* [重點八 : Segment Memory Management (Segmentation)](#重點八)
-* [重點九 : Paged Segment Memory Management (分頁式分段)](#重點九)
+* [重點六 : Page Buffering 機制](#重點六)
+* [重點七 : Free Frame 分配多寡對 page fault ratio 之影響](#重點七)
+* [重點八 : Thrashing](#重點八)
+* [重點九 : Working Set Model](#重點九)
 * [重點十 : 小結](#重點十)
 
 ## 重點一
@@ -45,8 +45,8 @@
   * p :  Page fault ratio 
 * 欲提高 Virtual Memory 之效率，就是要降低 effective memory access time ( 降低 page fault ratio )
 * 影響 Page fault ratio 之因素
-  * [1] Page Replacement algo 之選擇
-  * [2] Frame 數分配多寡之影響
+  * [1] [Page Replacement algo 之選擇](#重點五)
+  * [2] [Frame 數分配多寡之影響](#重點七) 
   * [3] Page size 之影響
   * [4] Program Structure 之影響
 
@@ -171,7 +171,34 @@
 * 一般來說，Process所分配到的 frame 愈多，則 page fault ratio 愈低。 
 * O.S 在分配 Process Frame 時，數目有最少數目與最大數目的限制，此兩類數目限制均取決於 Hardware 因素。
   * 最大數目的限制：由 physical memory size 決定 
-  * 
+  * 最少數目的限制：由機器指令結構決定，必須能讓任何一個機器指令順利執行完成，即機器指令執行過程中，Memory Access可能之最多次數。
+  　* e.g. IF - ID - EX - MEM - WB 中，IF 必有記憶體存取，MEM、WB可能有必有記憶體存取，因此最少的 frame 數目為 3。
+
+## 重點八
+### Thrashing
+* Thrashing 現象：
+  * 若 Process 分配到的 frame 不足，則會經常發生 page fault，此時必須執行 page replacement。
+  * 若採用 global replacement policy，則此 process 會去搶其它 process 的 frame，造成其它 process 也會發生 page fault，而這些 process 也會去搶     其它 process 的 frame，造成所有 process 皆在處理 page fault。
+  * 所有 process 皆忙於 swap in/out，造成 CPU idle。
+  * CPU idle 時 OS 會企圖調高 Multiprogramming Degree，但因為 frame 樹本來就不足，引進更多的 process 進入系統讓 Thrashing 現象更嚴重。
+  * 結果 
+    * [1] CPU utilization 急速下降
+    * [2] I/O-Device 異常忙碌
+    * [3] Process 花在 Page fault process time >> 正常 exec. time
+    ![image](https://user-images.githubusercontent.com/38349902/46914020-65057500-cfca-11e8-8496-6837965722ae.png)
+* Thrashing的解決方法：
+  * [法一] 降低 Multiprogramming degree
+  * [法二] 利用 Page Fault Frequency Control 機制來防止 thrashing
+    * 作法 : OS 規定合理的 page fault ratio 之上限與下限值，把 ratio 控制在一個合理範圍內。 
+      * case 1 : page fault ratio > 上限值 → OS 應多分配額外的 frame 給該 process。 
+      * case 2 : page fault ratio < 下限值 → OS 應從該 process 取走多餘的 frame，以分配給其它有需要的 process。
+      ![image](https://user-images.githubusercontent.com/38349902/46914097-8d41a380-cfcb-11e8-91f5-726c28fe4cbc.png)
+  * [法三] 利用 [Working Set Model](重點九)預估各 process 在不同執行時期所需的 frame 數目，並依此提供足夠的 frame 以防止thrashing。
+  
+## 重點九
+### Working Set Model
+
+    
 
   
   
