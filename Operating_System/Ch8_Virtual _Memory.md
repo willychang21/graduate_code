@@ -5,6 +5,8 @@
 * [重點四 : Page Replacement](#重點四)
 * [重點五 : Page Replacement algo.](#重點五)
    * [FIFO](#ＦＩＦＯ)
+   * [OPT](#ＯＰＴ)
+   * [LRU](#ＬＲＵ)
 * [重點六 : Paging 之相關計算](#重點六)
 * [重點七 : Structure of Page Table](#重點七)
 * [重點八 : Segment Memory Management (Segmentation)](#重點八)
@@ -71,6 +73,22 @@
 ## 重點五
 ### Page Replacement algo.
 #### ＦＩＦＯ
+* Def : 最先載入的 page 優先視為 victim page。
+* 分析
+  * [1] 簡單，易於實作 
+  * [2] 效果不是很好，page fault ratio 相當高
+    * 但不代表是最差的 (在 page replacement 沒有最差，因為無法預知未來，只有一個 OPT 是最佳)
+  * [3] 可能有 ⇒ Belady Anomaly(異常現象)：當Process分配到較多的Frame數目其Page Fault Ratio不降反升。
+#### ＯＰＴ
+* Def : 以將來長期不會使用的 page 視為 victim Page。 
+* 分析
+  * [1] 效果最佳，page fault ratio 最低 
+  * [2] 具備 Stack Property ⇒ 不會有 Belady Anomaly
+    * Stack Property : n 個 frame 所包含的 page set 一定是 (n+1) 個 frame 之 page set 的 subset
+      * 凡是具備 Stack property 者，絕不會發生 Belady Anomaly，反之則有可能發生 (只有 OPT & LRU 具備) 
+  * [3] 無法實作出，因為是看未來！不過可以知道 upper bound。
+#### ＬＲＵ
+* Def : 以最近不常使用的 page 視為 victim page。
 
     
   
