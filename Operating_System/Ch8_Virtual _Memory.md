@@ -8,7 +8,7 @@
    * [OPT](#ＯＰＴ)
    * [LRU](#ＬＲＵ)
    * [LRU近似法則](#ＬＲＵ近似法則)
-   * [LRU & MFU](#ＬＲＵ＆ＭＦＵ)
+   * [LRU & MFU](#ＬＲＵ－ＭＦＵ)
 * [重點六 : Paging 之相關計算](#重點六)
 * [重點七 : Structure of Page Table](#重點七)
 * [重點八 : Segment Memory Management (Segmentation)](#重點八)
@@ -128,7 +128,7 @@
  * [法三] Enhance Second Chance
    * 作法 : 以 < Reference Bit, Modification Bit > 作為挑 Victim Page 依據，值最小的 Page 作為 Victim，若多個 Page 具相同值，則以 FIFO 為主
 
-#### ＬＲＵ＆ＭＦＵ
+#### ＬＲＵ－ＭＦＵ
        
  
 
