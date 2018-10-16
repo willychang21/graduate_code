@@ -57,4 +57,80 @@ void BinaryTree::Levelorder()
         }
     }
 }
+```
+### Copy a B.T  : Time O(n)
+```C++
+void Copy(TreeNode *Origin)
+{
+    if (Origin == NULL)
+    {
+      t = Null;
+    }
+    else
+    {                   
+      new(t);
+      t -> Data = Origin -> Data ;
+      t -> leftchild = Copy(Origin->leftchild);
+      t -> Rightchild = Copy(Origin->Righttchild);      
+    }
+    return t;
+}
+```
+### Equal(S,T) 利用 preorder(效率比中後序高)
+```C++
+void Equal(TreeNode *S,TreeNode *T)
+{
+  result = False;                                      //設初始值為False
+  if(S==NULL && T==NULL)  
+  {
+    result = True;                                     //兩個都空的 -> 一樣
+  }
+  else if(S!=NULL && T!=NULL)
+  {
+	if(S->Data == T->Data)                             //比D                         
+	{
+		if(Equal(S->Leftchild,T->Leftchildtchild)      //比L
+		{ 
+			result=Equal(S->Rightchild,T->Rightchild); //比R
+		}
+	}
+  }
+  else
+    result = False;
+}
+```
+### Count B.T Node num 利用 postorder
+```C++
+void Count(TreeNode *T)
+{
+  if(T==NULL)
+  {
+	return 0;
+  }
+  else
+  {
+	nL = Count(T->Leftchild);    //nL=Count(L)
+    nR = Count(T->Rightchild);	 //nL=Count(R)
+	return (nL+nR+1);            //左子樹+右子樹+Root
+}
+```
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
