@@ -131,7 +131,7 @@ void Hight(TreeNode *T)
   }
 }
 ```
-### SWAP B.T  利用 postorder
+### Swap B.T  利用 postorder
 ```C++
 void Swap(TreeNode *T)  
 {
@@ -142,6 +142,26 @@ void Swap(TreeNode *T)
 	temp = T->Leftchild;
 	T->Leftchild = T->Rightchild;
 	T->Rightchild = temp;
+  }
+}
+```
+### Expression B.T 求值 Recursive algo
+```
+void Evaluate(TreeNode *T)     //T:expression B.T
+{
+  if(T!=NULL)
+  {
+	  Evaluate(T->Leftchild);
+	  Evaluate(T->Rightchild);
+	  switch(T->Data)          //Data 放 operator 
+	  {
+	      case "+" : T->res = (T->Leftchild)->res + (T->Rightchild)->res; // res 放 operand
+	      case "-" : T->res = (T->Leftchild)->res - (T->Rightchild)->res;
+	      case "*" : T->res = (T->Leftchild)->res * (T->Rightchild)->res;
+	      case "/" : T->res = (T->Leftchild)->res / (T->Rightchild)->res;
+	      case "~" : T->res = ~(T->Rightchild)->res;
+              case "變數名" : T->res= 變數值 //常數值
+	  }
   }
 }
 ```
