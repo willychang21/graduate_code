@@ -87,9 +87,9 @@ void Equal(TreeNode *S,TreeNode *T)
   }
   else if(S!=NULL && T!=NULL)
   {
-	if(S->Data == T->Data)                             //比D                         
+	if(S->Data == T->Data)                                     //比D                         
 	{
-		if(Equal(S->Leftchild,T->Leftchildtchild)      //比L
+		if(Equal(S->Leftchild,T->Leftchildtchild)          //比L
 		{ 
 			result=Equal(S->Rightchild,T->Rightchild); //比R
 		}
@@ -110,10 +110,42 @@ void Count(TreeNode *T)
   else
   {
 	nL = Count(T->Leftchild);    //nL=Count(L)
-    nR = Count(T->Rightchild);	     //nL=Count(R)
+        nR = Count(T->Rightchild);   //nL=Count(R)
 	return (nL+nR+1);            //左子樹+右子樹+Root
 }
 ```
+
+### B.T Height
+```C++
+void Hight(TreeNode *T)
+{
+  if(T==NULL)
+  {
+	  return 0;	  
+  }
+  else
+  {
+	  HL = Hight(T->Leftchild);  //HL=Hight(L)
+	  HR = Hight(T->Rightchild); //HR=Hight(R)
+	  return MAX(HL,HR)+ 1;      //左子樹+右子樹+Root
+  }
+}
+```
+### SWAP B.T  利用 postorder
+```C++
+void Swap(TreeNode *T)  
+{
+  if(T!=NULL)
+  {
+	Swap(T->Leftchild);
+	Swap(T->Rightchild);
+	temp = T->Leftchild;
+	T->Leftchild = T->Rightchild;
+	T->Rightchild = temp;
+  }
+}
+```
+
     
   
   
