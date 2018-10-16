@@ -269,8 +269,8 @@ void BST::DeleteBST(int KEY){               // 要刪除具有KEY的node
 }
 ```
 ## BST Search x  
-Worst case = O(n)  //Skewed BST 
-Best case = O(lgn) //Full BST  
+Worst case = O(n)  //Skewed BST   
+Best case = O(lgn) //Full BST    
 Avg case = O(n)
 ```C++
 void BST::Search(int KEY){
@@ -294,7 +294,7 @@ void BST::Search(int KEY){
 ```
 ### AdjustHeap & BuildMaxHeap
 ```C++
-void AdjustHeap(tree,i,n)
+void AdjustHeap(tree,i,n)  //n:元素個數 ; i:Node之編號
 {
 	//tree : array[1...n] of int ;
 	//調整以 i 為 root 之 subtree 成為 Heap ;
@@ -322,6 +322,28 @@ void BuildMaxHeap(tree,n)
 	AdjustHeap(tree,i,n);		
 }
 ```
+### MaxHeap Delete MAX
+```C++
+void Delete-MAX(tree,n)
+{
+	MAX = tree[1];    //root is MAX
+	tree[1] = tree[n];//the last node 置入 root
+	n=n-1;            //元素個數減一
+	Adjust(tree,1,n); //以編號1為root之tree做調整
+}
+```
+### Thread B.T Data Structure
+```C++
+struct Node 
+{ 
+    struct Node *lchild, *Rchild; 
+    int Data; 
+    bool lthread; //True : 代表是lthread ; False : 代表是lchild
+    bool Rthread; //True : 代表是Rthread ; False : 代表是Rchild
+}; 
+``` 
+
+
 
 
 
