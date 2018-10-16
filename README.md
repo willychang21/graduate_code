@@ -5,6 +5,8 @@
 
 * [演算法筆記](http://alrightchiu.github.io/SecondRound/mu-lu-yan-suan-fa-yu-zi-liao-jie-gou.html)
 
+* [GeeksForGeeks](https://www.geeksforgeeks.org/)
+
 * [Mr.opengate O.S](http://mropengate.blogspot.com/search/label/Computer%20Science-Operating%20System)
 
 * [線代啟示錄](https://ccjou.wordpress.com/)
