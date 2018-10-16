@@ -146,7 +146,7 @@ void Swap(TreeNode *T)
 }
 ```
 ### Expression B.T 求值 Recursive algo
-```
+```C++
 void Evaluate(TreeNode *T)     //T:expression B.T
 {
   if(T!=NULL)
@@ -163,6 +163,126 @@ void Evaluate(TreeNode *T)     //T:expression B.T
               case "變數名" : T->res= 變數值 //常數值
 	  }
   }
+}
+```
+
+### BST Sort
+```C++
+void BST::InorderSort(){
+    TreeNode *T = new TreeNode;
+    T = Leftmost(root);  //找到Binary Tree整棵樹中「最左」的node
+    while(T){
+        cout << T->element << "(" << T->key << ")"; //element:名字悟空;key:戰鬥力指數5000
+        T = Successor(T); //找到「下一個」
+    }
+}
+```
+### BST Delete x
+```C++
+void BST::DeleteBST(int KEY){               // 要刪除具有KEY的node
+
+    TreeNode *delete_node = Search(KEY);    // 先確認BST中是否有具有KEY的node
+    if (delete_node == NULL) {
+        std::cout << "data not found.\n";
+        return;
+    }
+
+    TreeNode *y = 0;      // 真正要被刪除並釋放記憶體的node
+    TreeNode *x = 0;      // 要被刪除的node的"child"
+
+    if (delete_node->leftchild == NULL || delete_node->rightchild == NULL){
+        y = delete_node;
+    }
+    else{
+        y = Successor(delete_node);        // 將y設成delete_node的Successor
+    }                                      // 經過這組if-else, y調整成至多只有一個child
+                                           // 全部調整成case1或case2來處理
+    if (y->leftchild != NULL){
+        x = y->leftchild;                  // 將x設成y的child, 可能是有效記憶體,
+    }                                      // 也有可能是NULL
+    else{
+        x = y->rightchild;
+    }
+
+    if (x != NULL){                        // 在y被刪除之前, 這個步驟把x接回BST
+        x->parent = y->parent;             // 此即為圖二(c)中, 把基紐接回龜仙人的步驟
+    }
+                                           // 接著再把要被釋放記憶體的node之"parent"指向新的child
+    if (y->parent == NULL){                // 若刪除的是原先的root, 就把x當成新的root 
+        this->root = x;
+    }
+    else if (y == y->parent->leftchild){    // 若y原本是其parent之left child
+        y->parent->leftchild = x;           // 便把x皆在y的parent的left child, 取代y
+    }
+    else{                                   // 若y原本是其parent之right child
+        y->parent->rightchild = x;          // 便把x皆在y的parent的right child, 取代y
+    }                                       
+                                            // 針對case3
+    if (y != delete_node) {                 // 若y是delete_node的替身, 最後要再將y的資料
+        delete_node->key = y->key;          // 放回delete_node的記憶體位置, 並將y的記憶體位置釋放
+        delete_node->element = y->element;  // 圖二(d), y即是達爾, delete_node即是西魯
+    }
+
+    delete y;                               // 將y的記憶體位置釋放
+    y = 0;
+}
+```
+## BST Search x
+```C++
+void BST::Search(int KEY){
+
+    TreeNode *T = root;                // 將curent指向root作為traversal起點
+
+    while (T != NULL && KEY != T->key) // 兩種情況跳出迴圈:1.沒找到 2.有找到
+	{              
+                                             
+        if (KEY < T->key)
+		{                      
+            T = T->leftchild;          // 向左走
+        }
+        else 
+		{
+            T = T->rightchild;         // 向右走
+        }
+    }
+    return T;
+}
+```
+### BST Insert x
+```C++
+void BST::InsertBST(int key, string element){
+
+    TreeNode *y = 0;        // 準新手爸媽
+    TreeNode *x = 0;        // 哨兵
+    TreeNode *insert_node = new TreeNode(key, element);   // insert_node為將要新增的node
+
+    x = root;
+    while (x != NULL)                   // 在while中, 以如同Search()的方式尋找適當的位置  
+	{                      
+        y = x;                          // y先更新到原來x的位置
+        if (insert_node->key < x->key)  // 判斷x是要往left- 還是right- 前進
+		{ 
+            x = x->leftchild;
+        }
+        else
+		{
+            x = x->rightchild;
+        }
+    }                                   // 跳出迴圈後, x即為NULL
+                                        // y即為insert_node的parent
+    insert_node->parent = y;            // 將insert_node的parent pointer指向y
+
+    if (y == NULL)                      // 下面一組if-else, 把insert_node接上BST
+	{                     
+        this->root = insert_node;
+    }
+    else if (insert_node->key < y->key)
+	{
+        y->leftchild = insert_node;
+    }
+    else{
+        y->rightchild = insert_node;
+    }
 }
 ```
 
