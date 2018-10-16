@@ -292,6 +292,37 @@ void BST::Search(int KEY){
     return T;
 }
 ```
+### AdjustHeap & BuildMaxHeap
+```C++
+void AdjustHeap(tree,i,n)
+{
+	//tree : array[1...n] of int ;
+	//調整以 i 為 root 之 subtree 成為 Heap ;
+	x = tree[i];    //保存
+	j = 2*i;        //取得left child
+	while(j <= n)do //成立表示還有left child
+	{
+	   if(j < n)                   //有right child
+	       if(tree[j] < tree[j+1]) //找到child之MAX
+		   j = j + 1;          //J表示MAZ{lchild,Rchild}之index
+	   if(x >= tree[j])
+	       break;
+	   else
+	   {
+		tree[j/2]=tree[j];//上移到parent
+		j=2*j;            //新的lchild位置
+	   }
+	}//while
+	tree[j/2]=x //x置入正確底
+   
+}
+void BuildMaxHeap(tree,n)
+{
+    for(i<=n;i>=1;i--)
+	AdjustHeap(tree,i,n);		
+}
+```
+
 
 
     
