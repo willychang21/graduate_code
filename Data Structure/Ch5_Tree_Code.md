@@ -1,3 +1,4 @@
+> [TOC]
 ### Preorder
 ```C++
 void BinaryTree::Preorder(TreeNode *T)
@@ -268,7 +269,7 @@ void BST::DeleteBST(int KEY){               // 要刪除具有KEY的node
     y = 0;
 }
 ```
-## BST Search x  
+### BST Search x  
 Worst case = O(n)  //Skewed BST   
 Best case = O(lgn) //Full BST    
 Avg case = O(n)
