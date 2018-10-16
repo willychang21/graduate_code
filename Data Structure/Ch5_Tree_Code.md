@@ -177,7 +177,48 @@ void BST::InorderSort(){
     }
 }
 ```
+### BST Insert x
+Time : O(lgn)
+```C++
+void BST::InsertBST(int key, string element)
+{
+
+    TreeNode *y = 0;        // 準新手爸媽
+    TreeNode *x = 0;        // 哨兵
+    TreeNode *insert_node = new TreeNode(key, element);   // insert_node為將要新增的node
+
+    x = root;
+    while (x != NULL)                   // 在while中, 以如同Search()的方式尋找適當的位置  
+    {                      
+        y = x;                          // y先更新到原來x的位置
+        if (insert_node->key < x->key)  // 判斷x是要往left- 還是right- 前進
+	{ 
+            x = x->leftchild;
+        }
+        else
+	{
+            x = x->rightchild;
+        }
+    }                                   // 跳出迴圈後, x即為NULL
+                                        // y即為insert_node的parent
+    insert_node->parent = y;            // 將insert_node的parent pointer指向y
+
+    if (y == NULL)                      // 下面一組if-else, 把insert_node接上BST
+    {                     
+        this->root = insert_node;
+    }
+    else if (insert_node->key < y->key)
+    {
+        y->leftchild = insert_node;
+    }
+    else
+    {
+        y->rightchild = insert_node;
+    }
+}
+```
 ### BST Delete x
+Time : O(lgn)
 ```C++
 void BST::DeleteBST(int KEY){               // 要刪除具有KEY的node
 
@@ -227,64 +268,31 @@ void BST::DeleteBST(int KEY){               // 要刪除具有KEY的node
     y = 0;
 }
 ```
-## BST Search x
+## BST Search x  
+Worst case = O(n)  //Skewed BST 
+Best case = O(lgn) //Full BST  
+Avg case = O(n)
 ```C++
 void BST::Search(int KEY){
 
     TreeNode *T = root;                // 將curent指向root作為traversal起點
 
     while (T != NULL && KEY != T->key) // 兩種情況跳出迴圈:1.沒找到 2.有找到
-	{              
+    {              
                                              
         if (KEY < T->key)
-		{                      
+	{                      
             T = T->leftchild;          // 向左走
         }
         else 
-		{
+	{
             T = T->rightchild;         // 向右走
         }
     }
     return T;
 }
 ```
-### BST Insert x
-```C++
-void BST::InsertBST(int key, string element){
 
-    TreeNode *y = 0;        // 準新手爸媽
-    TreeNode *x = 0;        // 哨兵
-    TreeNode *insert_node = new TreeNode(key, element);   // insert_node為將要新增的node
-
-    x = root;
-    while (x != NULL)                   // 在while中, 以如同Search()的方式尋找適當的位置  
-	{                      
-        y = x;                          // y先更新到原來x的位置
-        if (insert_node->key < x->key)  // 判斷x是要往left- 還是right- 前進
-		{ 
-            x = x->leftchild;
-        }
-        else
-		{
-            x = x->rightchild;
-        }
-    }                                   // 跳出迴圈後, x即為NULL
-                                        // y即為insert_node的parent
-    insert_node->parent = y;            // 將insert_node的parent pointer指向y
-
-    if (y == NULL)                      // 下面一組if-else, 把insert_node接上BST
-	{                     
-        this->root = insert_node;
-    }
-    else if (insert_node->key < y->key)
-	{
-        y->leftchild = insert_node;
-    }
-    else{
-        y->rightchild = insert_node;
-    }
-}
-```
 
     
   
