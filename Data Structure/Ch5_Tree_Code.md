@@ -110,7 +110,7 @@ void Count(TreeNode *T)
   else
   {
 	nL = Count(T->Leftchild);    //nL=Count(L)
-    nR = Count(T->Rightchild);	 //nL=Count(R)
+    nR = Count(T->Rightchild);	     //nL=Count(R)
 	return (nL+nR+1);            //左子樹+右子樹+Root
 }
 ```
