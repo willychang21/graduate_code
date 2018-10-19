@@ -1,4 +1,3 @@
-> [TOC]
 ### Preorder
 ```C++
 void BinaryTree::Preorder(TreeNode *T)
@@ -343,6 +342,69 @@ struct Node
     bool Rthread; //True : 代表是Rthread ; False : 代表是Rchild
 }; 
 ``` 
+### Insun(x) & InPre(x) 利用 Thread 找 Inorder 順序中 x 下一個 & 前一個 node
+```C++
+void Insuc(x)
+{
+	temp = x -> Rchild;  //RightThread是True的話x -> Rchild就是下個node
+	if(x -> RightThread == False)//RightThread是False的話代表只是Rchild
+	{
+		while(temp -> leftThread != True)//沿著x的Rchild往左下尋找，直到leftThread為True
+		{                                //因為找到這個的leftThread會指著x，代表他是x的下個node
+			temp = temp -> lchild;
+		}
+	}
+	return temp;
+}
+void InPre(x)  //大同小異
+{
+	temp = x -> lchild;
+	if(x -> leftThread == False)
+	{
+		while(temp -> RightThread != True)
+		{
+			temp = temp -> Rchild;
+		}
+	}
+	return temp;
+}
+```
+### Inorder Tree Traversal 沒有 recursion & stack
+```C++
+void Inorder(T:Thread Binary Tree Head)//Head node 不存 Data 當起點終點用
+{
+	temp = T; //temp = 起點 
+	temp = Insuc(temp); // temp = t1 (第1個node)
+	while(temp!=T)      //不到終點不停 
+	{
+		cout<<temp->Date;  //print出data
+		temp = Insuc(temp);//找下個node
+	}		
+}
+```
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 
