@@ -347,21 +347,21 @@ struct Node
 void Insuc(x)
 {
 	temp = x -> Rchild;  //RightThread是True的話x -> Rchild就是下個node
-	if(x -> RightThread == False)//RightThread是False的話代表只是Rchild
+	if(x -> RightThread == false)//RightThread是False的話代表只是Rchild
 	{
-		while(temp -> leftThread != True)//沿著x的Rchild往左下尋找，直到leftThread為True
+		while(temp -> leftThread != true)//沿著x的Rchild往左下尋找，直到leftThread為True
 		{                                //因為找到這個的leftThread會指著x，代表他是x的下個node
 			temp = temp -> lchild;
 		}
 	}
 	return temp;
 }
-void InPre(x)  //大同小異
+void InPre(x)
 {
 	temp = x -> lchild;
-	if(x -> leftThread == False)
+	if(x -> leftThread == false)
 	{
-		while(temp -> RightThread != True)
+		while(temp -> RightThread != true)
 		{
 			temp = temp -> Rchild;
 		}
@@ -382,6 +382,30 @@ void Inorder(T:Thread Binary Tree Head)//Head node 不存 Data 當起點終點�
 	}		
 }
 ```
+### Insert node in Thread  
+下面是以插入成為Rchild為範例  
+如果要插入lchild，須改  
+* left ⇔ Right
+* Insuc(t) ⇒ InPre(t)
+```C++
+void Insert_Thread(Node *S,Node *t)//插入t成為S的Rchild
+{
+	t -> RightThread = S -> RightThread;//直接繼承S的RightThread
+	t -> Rchild = S -> Rchild;          //直接繼承S的Rchild
+	t -> leftThread = true;             //指向S
+	t -> lchild = S;
+	S -> RightThread = false;           //S的兒子變t
+	S -> Rchild = t;
+	
+	if(t->RightThread == false)         //繼承下來的RightThread如果是false
+	{                                   //代表原本有兒子
+		temp = Insuc(t);                //找t的下一個node
+		temp -> lchild = t;             //並指向t
+	}
+}
+```
+
+
 	
 	
 	
