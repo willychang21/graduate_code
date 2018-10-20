@@ -9,6 +9,9 @@
 
 * [Mr.opengate O.S](http://mropengate.blogspot.com/search/label/Computer%20Science-Operating%20System)
 
+* [EE 4720, Computer Architecture](http://www.ece.lsu.edu/ee4720/)
+
+
 * [線代啟示錄](https://ccjou.wordpress.com/)
 
 * [麻省理工公开课-线性代数-完整笔记](https://github.com/apachecn/math)
