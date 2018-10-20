@@ -34,11 +34,53 @@
     * hit time: 判斷記憶體是否hit + 把上層資料搬到處理器的時間
   * miss: data needs to be retrived from a block in the lower level
     * miss rate: 1 - (hit rate)
-    * miss penalty: time to replace a block in the upper level (主要) + time to deliver the block to the processor
+    * miss penalty: Time to replace a block in the upper level(主要) + time to deliver the block to processor(CPU)裡的 cache (L1 Cache)
   * hit time << miss penalty
 ## 重點三
 ### Cache
 #### direct-mapped cache
+![image](https://user-images.githubusercontent.com/38349902/47252361-f7e45a80-d475-11e8-9ba3-47a5b45a614a.png)
+* 在 cache 裡要儲存 valid bit + tag + data
+  * valid bit
+    * 紀錄 cache 內是否為有效資訊
+    * 1 = present, 0 = not present
+    * initially 0，因為處理器剛啟動時，內容全部是無效的  
+![image](https://user-images.githubusercontent.com/38349902/47253036-6e865580-d480-11e8-917b-05aa0485b4d8.png)
+#### Spatial locality 優點
+* 因為有 spatial locality，所以希望一次可以搬好幾個 word 進來，也就是希望 block size 要大一點，讓這些 word 短時間內存取機率高
+* 16 個 word 共用 1 個 tag & valid bit，且 tag 的共用提高快取內記憶體使用的效率 
+![image](https://user-images.githubusercontent.com/38349902/47253146-08023700-d482-11e8-8bf7-60ee96c20f86.png)
+#### block size & missed rate 
+![image](https://user-images.githubusercontent.com/38349902/47253426-eb1b3300-d484-11e8-958a-9d2b59ae62de.png)
+Q : Block size ↑ , Miss rate 卻是先下降再上升, why??
+A : 一開始沒掉下來的原因是 Block size 太小，沒有得到spatial locality 的好處，再放大才能得之好處，但太大，整個 cache space 是固定的，當 cache block 總數 ↓，block & block 會互相競爭，因此 Miss rate ↑，miss penalty ↑
+* 減少 miss penality 方法
+  * [法一] early restart : 送到需要的 word 時就直接開始執行，而不是等整個 block 送過來才開始
+  * [法二] request(critical) word first : 需要的 word 會先從 memory 送到 Cache 中，剩下的 word 才會被 load
+  * request(critical) word first 比較快
+
+## 重點四
+### Cache Concept
+#### Cache miss handling
+* Cache miss handling 基本方法
+  * stall the CPU，凍結 register 內容值
+  * use Cache Controller to handle Cache , load the miss block from memory to cache
+  * 當資料 load 進 Cache 後，重新執行 Cache miss 的那個 Cycle
+* Multi-Cycle or Pipeline handling insCache miss Steps
+  * (1) 將原始 PC (目前 PC - 4)送到 Memory
+  * (2) 通知 Main Memory 執行讀取，並等待 Memory 完成此存取動作
+  * (3) 寫入 Cache，將從 Memory 得到的 Data 放入適當的欄位，將位址的上半部分(來自CPU)寫入 Tag 欄位，並 Set Valid bit
+  * (4) 重新啟動上述 Step 1 的 instruction，refetch 已經由 Memory 送至 Cache 的 instruction
+* Cache 對資料存取的控制在本質上是相同的，一旦失誤僅處理 CPU 直到 Memory 將 Data 回應
+#### Cache Write-in handling
+* 假設使用 sw 將 data 只有寫入 Cahce，沒改變 Main Memory 的值  
+
+
+
+
+
+  
+  
 
 
 
