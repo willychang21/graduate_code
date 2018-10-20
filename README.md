@@ -19,3 +19,6 @@
 * [PTT Grad-ProbAsk](https://www.ptt.cc/bbs/Grad-ProbAsk/index.html)
 
 * [Markdown Tables Generator](http://www.tablesgenerator.com/markdown_tables)
+
+* [412](#CodeWiki/Computer_Organization/Ch3_CPU_Performance.md)
+      
