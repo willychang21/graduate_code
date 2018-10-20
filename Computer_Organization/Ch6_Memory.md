@@ -73,9 +73,32 @@ A : 一開始沒掉下來的原因是 Block size 太小，沒有得到spatial lo
   * (4) 重新啟動上述 Step 1 的 instruction，refetch 已經由 Memory 送至 Cache 的 instruction
 * Cache 對資料存取的控制在本質上是相同的，一旦失誤僅處理 CPU 直到 Memory 將 Data 回應
 #### Cache Write-in handling
-* 假設使用 sw 將 data 只有寫入 Cahce，沒改變 Main Memory 的值  
-
-
+* 假設使用 sw 將 data 只有寫入 Cahce，沒改變 Main Memory 的值 → inconsistent (不一致)
+* 解決方法 
+  * [1] write-though : 寫入 Cache，也寫入 Main Memory
+    * Simple but bad performance
+    * 解決 : 使用 write buffer 
+      * write buffer 儲存等待被寫入 Memory 的 Data。
+        * FIFO
+        * typical number of entries: 4
+        * write buffer 沒滿 : processor 繼續執行
+        * wirte buffer 滿了 : processor stall until write buffer 有空位
+    * use No Write Allocate(Write around) (p26.)
+  * [2] write-back : 新的 data 只會被寫入 Cache。當備置換時，修改過(dirty)的 block 才會被寫回 lower level memory
+    * improve performance but hard to implement
+    * can use a write buffer to allow replacing block to be read first
+    * use Write Allocate (p26.)
+#### Write Allocate
+* 發生 Write Miss 處理方法
+  * [1] Write Allocate : 從 Memory 搬所需 Block 到 Cache 再寫入
+  * [2] No Write Allocate(Write around) : 所需 Block 只搬到 Memory，不搬到 Cache，且 Reset Cache block's valid bit 為 0 (not fresh)
+    * 想法 : 程式寫入整個 Block，初次 Write Miss 帶來的 Block 是不需要的
+#### Split Cache & Combined Cache 
+* use two same capacity split cache's combined cache
+* high hit rate
+* split to instruction Cache & data Cache → bandwidth ↑
+* bandwidth 變兩倍的好處，輕易克服 Miss rate 稍微增加所帶來的壞處
+#### Memory Design to Support Cache
 
 
 
