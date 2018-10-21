@@ -51,8 +51,8 @@
 * 16 個 word 共用 1 個 tag & valid bit，且 tag 的共用提高快取內記憶體使用的效率 
 ![image](https://user-images.githubusercontent.com/38349902/47253146-08023700-d482-11e8-8bf7-60ee96c20f86.png)
 #### block size & missed rate 
-![image](https://user-images.githubusercontent.com/38349902/47253426-eb1b3300-d484-11e8-958a-9d2b59ae62de.png)
-Q : Block size ↑ , Miss rate 卻是先下降再上升, why??
+![image](https://user-images.githubusercontent.com/38349902/47253426-eb1b3300-d484-11e8-958a-9d2b59ae62de.png)  
+Q : Block size ↑ , Miss rate 卻是先下降再上升, why??  
 A : 一開始沒掉下來的原因是 Block size 太小，沒有得到spatial locality 的好處，再放大才能得之好處，但太大，整個 cache space 是固定的，當 cache block 總數 ↓，block & block 會互相競爭，因此 Miss rate ↑，miss penalty ↑
 * 減少 miss penality 方法
   * [法一] early restart : 送到需要的 word 時就直接開始執行，而不是等整個 block 送過來才開始
