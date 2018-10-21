@@ -157,9 +157,10 @@ DRAM 將一列的中所有位元暫存在 DRAM 內的 Buffer，以做行的存�
 
 ## 重點七
 ### 多層 Cache 來減少 Miss Penalty Time
-![image](https://user-images.githubusercontent.com/38349902/47265841-7caba300-d560-11e8-8f05-72c68e2f605e.png)  
+![image](https://user-images.githubusercontent.com/38349902/47265841-7caba300-d560-11e8-8f05-72c68e2f605e.png)
+
 | L1 Cache | 允許較小 | ↓ hit time | spilt cache | write through |
-|:--------:|:--------:|:-----------:|:--------------:|:-------------:|
+|:--------:|:-------:|:---------:|:-------------:|:-------------:|
 | L2 Cache | 需要夠大 | ↓ miss rate | combined cache | write back |
 #### GMR & LMR
 * Global miss rate : The fraction of references that miss in all levels of a multilevel cache
