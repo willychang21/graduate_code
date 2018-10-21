@@ -140,7 +140,8 @@ DRAM 將一列的中所有位元暫存在 DRAM 內的 Buffer，以做行的存�
 |  | 1-way | n-way | full-way |
 | 定義 | cache 1 個 index 有 1 個 block 1 個 block 的 block size 自訂  | cache 1 個 index 有 1 個 set ，1 個 set 含有固定數量的 block  ，只要 Memory mapped 之 cache set 內有 free block 都可使用 | cache 隨便放 |
 | 白話 | 很多人搶一個位子 | 很多人搶很多位子 | 位子隨便坐 |
-| memory block 位置 | block address % number of cache blocks | block address % number of cache sets |  |  
+| memory block 位置 | block address % number of cache blocks | block address % number of cache sets |  |   
+
 ![image](https://user-images.githubusercontent.com/38349902/47264811-19b21000-d550-11e8-984e-b57ad546c054.png)
 * Cache Block num = set num x associativity
   * 固定 cache size : set num & associativity 成反比 
@@ -156,7 +157,7 @@ DRAM 將一列的中所有位元暫存在 DRAM 內的 Buffer，以做行的存�
 
 ## 重點七
 ### 多層 Cache 來減少 Miss Penalty Time
-![image](https://user-images.githubusercontent.com/38349902/47265841-7caba300-d560-11e8-8f05-72c68e2f605e.png)
+![image](https://user-images.githubusercontent.com/38349902/47265841-7caba300-d560-11e8-8f05-72c68e2f605e.png)  
 | L1 Cache | 允許較小 | ↓ hit time | spilt cache | write through |
 |:--------:|:--------:|:-----------:|:--------------:|:-------------:|
 | L2 Cache | 需要夠大 | ↓ miss rate | combined cache | write back |
