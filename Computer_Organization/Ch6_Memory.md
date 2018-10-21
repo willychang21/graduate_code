@@ -140,7 +140,7 @@ DRAM 將一列的中所有位元暫存在 DRAM 內的 Buffer，以做行的存�
 |  | 1-way | n-way | full-way |
 | 定義 | cache 1 個 index 有 1 個 block 1 個 block 的 block size 自訂  | cache 1 個 index 有 1 個 set ，1 個 set 含有固定數量的 block  ，只要 Memory mapped 之 cache set 內有 free block 都可使用 | cache 隨便放 |
 | 白話 | 很多人搶一個位子 | 很多人搶很多位子 | 位子隨便坐 |
-| memory block 位置 | block address % number of cache blocks | block address % number of cache sets |  |
+| memory block 位置 | block address % number of cache blocks | block address % number of cache sets |  |  
 ![image](https://user-images.githubusercontent.com/38349902/47264811-19b21000-d550-11e8-984e-b57ad546c054.png)
 * Cache Block num = set num x associativity
   * 固定 cache size : set num & associativity 成反比 
@@ -172,7 +172,19 @@ DRAM 將一列的中所有位元暫存在 DRAM 內的 Buffer，以做行的存�
 Average Memory Access Time = Time for a hit + ( Miss rate x Miss penalty )  
 consider multilevel cache,AMAT = T1 + M1 x P1 + M2 x P2 ...+ Mn x Pn
 
-#### Virtual Memory
+## 重點八
+### Virtual Memory
+* Main Memory 可看作 Disk 的 Cache，此技巧稱 virtual memory
+  * memory 其實是跟 user program space(virtual space)作對應，program 一開始要放硬碟，要執行時將游標點擊程式
+* 設計動機
+  * [1] 允許多個 program 能有效率切安全地 share memory
+  * [2] 消除 main memory 太小所造成 program 限制
+
+#### address 轉譯
+![image](https://user-images.githubusercontent.com/38349902/47266889-0f533e80-d56f-11e8-9018-383448251128.png)
+![image](https://user-images.githubusercontent.com/38349902/47266815-29d8e800-d56e-11e8-88a1-9b70c6d8024b.png)
+#### Page Table
+
 
 
 
