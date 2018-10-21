@@ -74,7 +74,7 @@ A : 一開始沒掉下來的原因是 Block size 太小，沒有得到spatial lo
 * Cache 對資料存取的控制在本質上是相同的，一旦失誤僅處理 CPU 直到 Memory 將 Data 回應
 #### Cache Write-in handling
 * 假設使用 sw 將 data 只有寫入 Cahce，沒改變 Main Memory 的值 → inconsistent (不一致)
-* 解決方法 
+* 解決方法 → consistent  
   * [1] write-though : 寫入 Cache，也寫入 Main Memory
     * Simple but bad performance
     * 解決 : 使用 write buffer 
@@ -84,7 +84,7 @@ A : 一開始沒掉下來的原因是 Block size 太小，沒有得到spatial lo
         * write buffer 沒滿 : processor 繼續執行
         * wirte buffer 滿了 : processor stall until write buffer 有空位
     * use No Write Allocate(Write around) (p26.)
-  * [2] write-back : 新的 data 只會被寫入 Cache。當備置換時，修改過(dirty)的 block 才會被寫回 lower level memory
+  * [2] write-back : 新的 Data 只會被寫入 Cache 的 Block。當此 Block 被置換時，修改過(dirty)的 block 才會被寫回 lower level memory
     * improve performance but hard to implement
     * can use a write buffer to allow replacing block to be read first
     * use Write Allocate (p26.)
@@ -93,12 +93,32 @@ A : 一開始沒掉下來的原因是 Block size 太小，沒有得到spatial lo
   * [1] Write Allocate : 從 Memory 搬所需 Block 到 Cache 再寫入
   * [2] No Write Allocate(Write around) : 所需 Block 只搬到 Memory，不搬到 Cache，且 Reset Cache block's valid bit 為 0 (not fresh)
     * 想法 : 程式寫入整個 Block，初次 Write Miss 帶來的 Block 是不需要的
-#### Split Cache & Combined Cache 
-* use two same capacity split cache's combined cache
-* high hit rate
-* split to instruction Cache & data Cache → bandwidth ↑
-* bandwidth 變兩倍的好處，輕易克服 Miss rate 稍微增加所帶來的壞處
+#### Cache 實現分為 : Split Cache & Combined Cache 
+* Split Cache : 分為 Instruction Cache & Data Cache
+  * 優點 : Bandwidth ↑ ( only Bandwidth !! not speed )
+  * 缺點 : Miss rate ↑ ，但可以輕易克服(Bandwidth ↑)
+* Combined Cache 
+  * 優點 : 較佳 hit rate，Miss rate ↓
 #### Memory Design to Support Cache
+增加由**Memory 到 Cache 的 Bandwidth**，可以減少 Miss Penalty  
+以下三種支援 Cache 的 Memory Design  
+![image](https://user-images.githubusercontent.com/38349902/47263724-d8af0100-d539-11e8-854b-f3c1a9ba295c.png)
+#### 提升 Memory 結構支援 Cache (p30.)
+利用 DRAM 結構優勢，DRAM 在邏輯上是組織成矩形陣列，分為 Row acess & Column access  
+DRAM 將一列的中所有位元暫存在 DRAM 內的 Buffer，以做行的存取。另有其他時序訊號以允許重複存取 Buffer 中的資料，而不用再花一次列的存取時間，此種方式稱為 page mode 
+* EDO RAM 擴充資料輸出記憶體 Extended Data Output RAM
+* SDRAM 同步動態隨機存取記憶體 synchronous dynamic random-access memory
+  * 提供資料的 burst access，以存取一連串 squentail data，SDRAM 接收起始位址與傳輸的資料長度，burst access 的資列藉由 clock signal 控制
+  * 優點
+    * [1] 利用 clock 來除去同步需求
+    * [2] 在 burst access 時不需要再提供位址
+* DDR SRAM 雙倍資料率同步動態隨機存取記憶體 Double Data Rate Synchronous Dynamic Random Access Memory
+  * clock 上升&下降邊緣皆可傳輸
+* QDR SRAM 四倍資料倍率同步動態隨機存取記憶體 Quad Data Rate (QDR) SRAM
+  * 可讓讀寫同時進行
+
+## 重點五
+### Cache Performance
 
 
 
