@@ -138,7 +138,7 @@ DRAM 將一列的中所有位元暫存在 DRAM 內的 Buffer，以做行的存�
 |  | direct mapped | set associative | fully associative |
 |:-----------------:|:-------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------:|-------------------|
 |  | 1-way | n-way | full-way |
-| 定義 | cache 1 個 index 有 1 個 block 1 個 block 的 block size 自訂  | cache 1 個 index 有 1 個 set ，1 個 set 含有固定數量的 block  ，只要 Memory mapped 之 cache set 內有 free block 都可使用 | cache 隨便放 |
+| 定義 | cache 1 個 entry 有 1 個 block 1 個 block 的 block size 自訂  | cache 1 個 entry 有 1 個 set ，1 個 set 含有固定數量的 block  ，只要 Memory mapped 之 cache set 內有 free block 都可使用 | cache 隨便放 |
 | 白話 | 很多人搶一個位子 | 很多人搶很多位子 | 位子隨便坐 |
 | memory block 位置 | block address % number of cache blocks | block address % number of cache sets |  |   
 
@@ -185,9 +185,48 @@ consider multilevel cache,AMAT = T1 + M1 x P1 + M2 x P2 ...+ Mn x Pn
 #### address 轉譯
 ![image](https://user-images.githubusercontent.com/38349902/47266889-0f533e80-d56f-11e8-9018-383448251128.png)
 ![image](https://user-images.githubusercontent.com/38349902/47266815-29d8e800-d56e-11e8-88a1-9b70c6d8024b.png)
-#### Page Table
+#### Page Table ( in memory )
+* 緣由 : fully associative → hard to find entry → build page table
+* 以 virtual page number 為 index ，找對應的 physical page number
+* 每個 program 都有自己的 page table，因為不同的程序使用相同的 virtual address，並將 program 的 virtual address space 對映到 main memory
+* page table 也包含不在 memory 的 page
+* Page table register(PTR) : 儲存指向 page table 的起始點
+* Page table + PC + register 代表了程式的狀態。如果想允許另一個程式來使用 CPU，必須先儲存這個狀態到 Stack。稍後再還原，程式便可繼續執行。這種狀態稱Process
+* 程序佔有 CPU 稱為 active ，反之 inactive。O.S 可藉由載入這個程序的狀態來讓他執行
+* 程序的位址空間由 page table 定義。O.S 只要載入 PTR 指向 Page table 就好了
+* O.S 負責分配 Physical memory & update page table，不同程序間的 virtual address space 不會有衝突
+![image](https://user-images.githubusercontent.com/38349902/47267331-e03fcb80-d574-11e8-8211-2f4e43e2bc3c.png)
+* page table 包括每個可能被對映的 virtual page，所以就不須 tag。
+* 用來存取 page table 的 index 包含全部的 block address，也就是 virtual page number。
 
+#### Page Fault
+* 需要的 page 不在 memory → page fault → 控制權給 O.S → 到下一層找 miss page → 決定此 miss page 放到 memory 哪個位置
+* swap space : 程序產生出來時，O.S 為這個程序的每個 page 在 disk 留的空間。O.S 會產生 Data structure 紀錄 all virtual page 放在 disk 的位置
+* page fault → all pages is used → O.S 選個 page swap (LRU)作為 victim page → victim page 放到 swap space
+  * purpose : 盡量降低 page fault 次數
+#### LRU 實作
+* 因為實作 LRU 成本過高(Counter table)，大部分 O.S 藉由追蹤 page 最近有沒有被用到來達成近似 LRU (approximate LRU)
+* approximate LRU 
+　* reference bit (used bit) : 在 page 被存取時 set : 0 → 1
+  * O.S 會週期性清除 reference bit : 1 → 0
+#### Write in handling
+* write back
+* dirty bit : 為了追蹤被讀進 memory 的 page 什麼時候被 write in，當 page 的任何 word 被 write in , set : 0 → 1 
+* O.S 選到 victim page，把 memory space 讓出給其他 page 前，dirty bit = 1 指出此 page 是否需要被寫回去
+![image](https://user-images.githubusercontent.com/38349902/47268235-ed62b780-d580-11e8-9dc3-bf1ac23062ff.png)
+#### 減少 page table size
+* 緣由 : page table 通常會很大，會吃掉很多 memory space
+* 解決方法
+  * [法一] 使用 limit register 限制 page table size
+  * [法二] 2 張 page table & 2 個分開的 limit register ( for stack & heap in MIPS )
+  * [法三] inverted page table (O.S)
+  * [法四] multilevel page table (O.S)
+  * [法五] 允許 page table 也被 paging 
+  
+## 重點九
+### TLB
 
+ 
 
 
 
