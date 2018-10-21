@@ -119,6 +119,61 @@ DRAM 將一列的中所有位元暫存在 DRAM 內的 Buffer，以做行的存�
 
 ## 重點五
 ### Cache Performance
+* [1] CPU Time = ( CPU execution cycles + Mem-stall cycles ) x Cycle Time
+* [2] Mem-stall cycle per program = ( Memory access / program ) x Miss rate x Miss penalty
+* [3] Mem-stall cycle per instruction = ( Memory access / instruction ) x Miss rate x Miss penalty
+* [4] CPI effective
+  * Mem-stall
+    * = CPI base + Memory stall per instruction
+    * = CPI base + I-Cache stall per instruction + D-Cache stall per instruction
+    * = CPI base + I-Cache access per instruction x Miss rate x Miss penalty + D-Cache access per instruction x Miss rate x Miss penalty
+  * hazard-stall
+    * = CPI base + lw%  x   load use%   x penalty
+    * = CPI base + beq% x miss predict% x penalty
+    * = CPI base +  J%  x     100%      x penalty
+
+## 重點六
+### Set associative Cache
+
+|  | direct mapped | set associative | fully associative |
+|:-----------------:|:-------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------:|-------------------|
+|  | 1-way | n-way | full-way |
+| 定義 | cache 1 個 index 有 1 個 block 1 個 block 的 block size 自訂  | cache 1 個 index 有 1 個 set ，1 個 set 含有固定數量的 block  ，只要 Memory mapped 之 cache set 內有 free block 都可使用 | cache 隨便放 |
+| 白話 | 很多人搶一個位子 | 很多人搶很多位子 | 位子隨便坐 |
+| memory block 位置 | block address % number of cache blocks | block address % number of cache sets |  |
+![image](https://user-images.githubusercontent.com/38349902/47264811-19b21000-d550-11e8-984e-b57ad546c054.png)
+* Cache Block num = set num x associativity
+  * 固定 cache size : set num & associativity 成反比 
+* 增加 associativity 
+  * 優點 : Miss rate ↓
+  * 缺點 : hit time ↑ (比的人越多 + 選擇延遲，且比較器 ↑、Hardware Cost ↑)
+#### Search Block in Cache
+![image](https://user-images.githubusercontent.com/38349902/47264946-bf667e80-d552-11e8-8aa2-43a39d5cce8c.png)
+#### Tag 大小 & associativity 關係[計算題]
+#### 選擇置換 Block
+* [1] LRU (Least recently used)
+* [2] random
+
+## 重點七
+### 多層 Cache 來減少 Miss Penalty Time
+![image](https://user-images.githubusercontent.com/38349902/47265841-7caba300-d560-11e8-8f05-72c68e2f605e.png)
+| L1 Cache | 允許較小 | ↓ hit time | spilt cache | write through |
+|:--------:|:--------:|:-----------:|:--------------:|:-------------:|
+| L2 Cache | 需要夠大 | ↓ miss rate | combined cache | write back |
+#### GMR & LMR
+* Global miss rate : The fraction of references that miss in all levels of a multilevel cache
+  * 以 CPU 為觀點，去看存取當中有多少比例在每層 Cache 找不到資料
+* Local miss rate : The fraction of references to one level of a cache that miss ; use in multilevel hierarchies
+  * 兩層關係，上層找不到下去找，找不到的比例
+* L1 GMR = L1 LMR    
+  L2 GMR = L1 LMR x L2 LMR  
+  L3 GMR = L1 LMR x L2 LMR x L3 LMR
+#### AMAT
+Average Memory Access Time = Time for a hit + ( Miss rate x Miss penalty )  
+consider multilevel cache,AMAT = T1 + M1 x P1 + M2 x P2 ...+ Mn x Pn
+
+#### Virtual Memory
+
 
 
 
