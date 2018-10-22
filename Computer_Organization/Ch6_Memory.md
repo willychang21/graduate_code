@@ -222,7 +222,7 @@ consider multilevel cache,AMAT = T1 + M1 x P1 + M2 x P2 ...+ Mn x Pn
   * [法三] inverted page table (O.S)
   * [法四] multilevel page table (O.S)
   * [法五] 允許 page table 也被 paging 
-  
+
 ## 重點九
 ### TLB (Translation Lookaside Buffer)
 TLB : 為 CPU 的一種 Cache，紀錄最近用過的轉換資訊，加速 address 轉換，可視為 page table 的 Cache。
@@ -265,6 +265,87 @@ TLB : 為 CPU 的一種 Cache，紀錄最近用過的轉換資訊，加速 addre
 
 ## 重點十
 ### Virtual Addressed Cache 
+![image](https://user-images.githubusercontent.com/38349902/47294369-75a79200-d63f-11e8-8f8a-5cc4cc2aec42.png)
+|      | Physical Addressed Cache                                                                    | Virtual Addressed Cache                                         | Mix Addressed Cache                            |
+|------|---------------------------------------------------------------------------------------------|-----------------------------------------------------------------|------------------------------------------------|
+|      | Physical Index ,  Physical Tagged                                                           | Virtual Index ,  Virtual Tagged                                 | Virtual Index ,  Physical Tagged               |
+|      | 1. Translate first from virtual address to physical address 2. Access with physical address | 1. Access Cache first 2. Only translate if going to main memory | 1. Alaways translate before going to the cache |
+| 優點 | 架構簡單                                                                                    | 存取效率高                                                      | 架構簡單、存取效率佳                           |
+| 缺點 | 存取效率差                                                                                  | 會有 aliasing problem                                           | Always 要轉換 Virtual to Physical address      |
+## 重點十ㄧ
+### Virtual Memory 保護機制
+Virtual Memory mechanism provide the memory protection amoung processes in a multi-processing environment
+
+* Hardware 提供 3 個基本能力
+  * [1] 提供 user mode & kernel mode 區分 user process & OS process
+  * [2] 提供一部分的 process state，讓 user process 只能讀不能寫，區分用 user/supervisor mode bit
+  * [3] 提供可能從 user mode 跳到 kernel 的機制，反指亦然
+* process A 切換到 process B (context switch)，需要確保 process B 不能存取 process A 的 page table ，有 TLB 需清掉 TLB 中屬於 process A 的 entry，強迫 TLB 載入 process B 的 entry
+* process identifier / task identifier 擴展 virtual address space
+  * 辨別正在執行的程序，並保留於 register 中，在 context switch 時 O.S 載入
+
+## 重點十二
+### Memory Hierarchy 4 Question
+#### Q1 : Block 可以放在哪個地方？
+| scheme            | number of set                             | block per set                 |
+|-------------------|-------------------------------------------|-------------------------------|
+| direct mapped     | number of blocks in cache                 | 1                             |
+| set associativity | number of blocks in cache / associativity | associativity(typically 2-16) |
+| full associative  | 1                                         | number of block in the cache  |
+* associativity ↑ ⇒ miss rate ↓ ( miss rate 的改善來自 compete same block miss )
+![](https://i.imgur.com/xOmg7ap.png)
+* 增加 cache size 比 增加 associativity 來降低 miss rate 有效
+* associativity 缺點 : Cost ↑ , access time ↑
+#### Q2 : 如何找到 Block ?
+|   associativity   |          搜尋法          |           location method            |   comparison required   |
+|:-----------------:|:------------------------:|:------------------------------------:|:-----------------------:|
+|   direct mapped   |           索引           |                 index                |            1            |
+| set associativity |        有限的搜尋        | index the set,search amoung elemonts | degree of associativity |
+|  full associative |         全部搜尋         |       search all cache entries       |      size of cache      |
+|  full associative | 分離的對應表(page table) |         seperate lookup table        |            0            |
+#### Q3 : Cache miss 時，如何 swap ?
+|                   | victim       | 選擇方法       |   |
+|-------------------|--------------|----------------|---|
+| direct mapped     | 1            | random LRU     |   |
+| set associativity | block in set | random 近似LRU |   |
+| full associative  | all          |                |   |
+* Cache 選擇的演算法由 Hardware 作，in fact，random 有時表現會比近似 LRU 好
+#### Q4 : Write in 時會發生什麼 ?
+* 在每個階層式記憶體中的每一層都可用 write-through & write-back
+* write-through 優點
+  * [1] 處理失誤較簡單，代價低 (不須將 1 個 block 寫回 lower level memory)
+  * [2] 比較容易實作 (實際上在高速系統中，需要 Buffer 配合)
+* write-back 優點
+  * [1] processor 以 cache 可以接受的速度寫入個別字組，而非以 memory 速度
+  * [2] 對 1 個 block 作的多次寫入動作只需 1 次寫入 lower level memory
+  * [3] 當 block 被 write-back 時，系統可以有效地應用高頻寬來傳輸(要寫回整個區塊)
+
+## 重點十三
+### 3C
+|            | Compulsory misses                                | Capacity misses                                  | Conflict misses                                                                                                                                            |
+|------------|--------------------------------------------------|--------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| def        | blcok 未被使用過，第一次讀取一定必不在 Cache 中  | 容量(Cache size)不足以裝下該程式需要讀取的 block | 發生於 set associativity & direct mapped 中，很多 blcok mapped 到同一 block or set。 不會發生在 full associativity (有空就可放，if 滿是容量問題，無關競爭) |
+| 改善       | blcok size ↑ , 程式存取所需要碰觸到 block 次數 ↓ | cache size ↑                                     | associativity ↑                                                                                                                                            |
+| 改善後缺點 | miss rate ↑, miss penalty ↑, performance ↓       | access time ↑ , performance ↓                    | access time ↑ , performance ↓                                                                                                                              |
+#### 降低 miss penalty 技術
+* non-blocking cache : cache miss 時 processor 繼續執行會存取資料快取的指令，通常用於 out of order 的 processor 隱藏 cache miss 之時間
+  * e.g. 用於 superscalar (dynamic pipeline scheduling)，指令照順序解碼，但不照順序執行
+  * block cache : 前面的 cache miss 處理完，後面指令才能夠存取
+* non-blocking cache 實作
+  * [1] hit under miss : 後人 hit time 隱藏前人 miss penalty
+  * [2] miss under miss : 前後都 miss，部分 miss penalty time 重疊
+## 重點十四
+### Cache Control design
+* Example cache characteristics
+* Four states of the cache controller
+  * Idle
+  * Compare Tag
+  * Write-Back
+  * Allocate
+
+## 重點十五
+### Virtual Machine (參考 O.S)
+p.92
 
 
  
