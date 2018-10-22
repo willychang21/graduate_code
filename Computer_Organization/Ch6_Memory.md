@@ -224,7 +224,48 @@ consider multilevel cache,AMAT = T1 + M1 x P1 + M2 x P2 ...+ Mn x Pn
   * [法五] 允許 page table 也被 paging 
   
 ## 重點九
-### TLB
+### TLB (Translation Lookaside Buffer)
+TLB : 為 CPU 的一種 Cache，紀錄最近用過的轉換資訊，加速 address 轉換，可視為 page table 的 Cache。
+* page table in memory，程式每一次 memory access 至少花兩次的時間
+  * 第一次 : memory access to get physical address
+  * 第二次 : memory access to get data
+* page table 存取也具有 locality，當 page table 的 entry 被用於轉換成 virtyal page no. 後，之後可能馬上會再被使用。印為存取這 page 的 word 是有 temporary locality & spactial locality  
+![](https://i.imgur.com/4dZfjIx.png)
+* TLB 失誤
+  * page in memory ⇒ TLB 失誤 = 轉換資訊失誤
+  * page isn’t in memory ⇒ TLB 失誤 = page fault ⇒ O.S 處理
+* 解決 TLB 失誤的方案
+  * Hardware : O.S 從 Hardware 搬 page 上來
+  * Software : cache controller 搬 block 上來
+  * 兩種效能之差一點點，基本動作其實是一樣的
+* fully-associative & small TLB 佔多數
+  * fully-associative : 較小 miss rate
+  * small : 使得 fully-associative 成本不會太高
+* fully-associative 實作 LRU 成本高
+  * 因為 TLB 失誤 比 page fault 容易發生，須以成本較低的方法處理 ⇒ 只好提供 random
+* 刀刀見骨表
+
+|存取 page table|	virtual address	|1 刀	|index + physical page address|
+|:--:|:--:|:--:|:--:|:--:|
+|存取 TLB (cache)	|virtual address|	2 刀	|tag + index + physical page address|
+|存取 memory	|physical address|	1 刀	|physicla page no. + offset|
+|存取 cache|	physical address|	2 刀	|tag + index + offset|
+#### 整合 Vitual Memory & TLB & Cache
+![](https://i.imgur.com/xSnCip0.png)
+#### 記憶體階層的全部動作
+|TLB|	Page Table	|Cache|	可能發生?|
+|:--:|:--:|:--:|:--:|
+|hit|	hit	|miss|	√|
+|miss|	hit	|hit|	√|
+|miss|	hit	|miss|	√|
+|miss|	miss|	miss|	√|
+|hit|	miss|	miss|	x|
+|hit	|miss|	hit|	x|
+|miss|	miss|	hit|	x|
+
+## 重點十
+### Virtual Addressed Cache 
+
 
  
 
