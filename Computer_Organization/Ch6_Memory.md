@@ -1,17 +1,60 @@
 # Ch6 Memory
 * [重點一、Principle of Locality](#重點一)
+  * Pinciple of locality
+    * temporal locality
+    * spatial locality
+  * Memory Technology
+    * SRAM
+    * DRAM
+    * Magnetic disk
 * [重點二、Memory Hierarchy](#重點二)
+  * 目的
+  * Block
+  * terminology (術語)
+    * hit
+    * miss
 * [重點三、Cache](#重點三)
+  * direct-mapped cache
+  * Spatial locality 優點
+  * block size & missed rate
+  * 減少 miss penality 方法
 * [重點四、Cache Concept](#重點四)
+  * Cache miss handling
+  * Cache Write-in handling
+  * Write Allocate
+  * Cache 實現分為 : Split Cache & Combined Cache
+  * Memory Design to Support Cache
+  * 提升 Memory 結構支援 Cache (p30.)
 * [重點五、Cache Performance](#重點五)
+  * CPU Time
+  * Mem-stall cycle per program
+  * Mem-stall cycle per instruction
+  * CPI effective
+    * Mem-stall
+    * hazard-stall
 * [重點六、Set associative Cache](#重點六)
 * [重點七、多層 Cache 來減少 Miss Penalty Time](#重點七)
+  * GMR & LMR
+  * AMAT
 * [重點八、Virtual Memory](#重點八)
+  * address 轉譯
+  * Page Table ( in memory )
+  * Page Fault
+  * LRU 實作
+  * Write in handling
+  * 減少 page table size
 * [重點九、TLB (Translation Lookaside Buffer)](#重點九)
+  * 整合 Vitual Memory & TLB & Cache
+  * 記憶體階層的全部動作
 * [重點十、Virtual Addressed Cache](#重點十)
 * [重點十ㄧ、Virtual Memory 保護機制](#重點十ㄧ)
 * [重點十二、Memory Hierarchy 4 Question](#重點十二)
+  * Q1 : Block 可以放在哪個地方？
+  * Q2 : 如何找到 Block ?
+  * Q3 : Cache miss 時，如何 swap ?
+  * Q4 : Write in 時會發生什麼 ?
 * [重點十三、3C](#重點十三)
+  * 降低 miss penalty 技術
 * [重點十四、Cache Control design](#重點十四)
 * [重點十五、Virtual Machine (參考 O.S)](#重點十五)
 
