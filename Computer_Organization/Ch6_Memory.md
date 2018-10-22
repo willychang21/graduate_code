@@ -1,6 +1,19 @@
 # Ch6 Memory
 * [重點一、Principle of Locality](#重點一)
 * [重點二、Memory Hierarchy](#重點二)
+* [重點三、Cache](#重點三)
+* [重點四、Cache Concept](#重點四)
+* [重點五、Cache Performance](#重點五)
+* [重點六、Set associative Cache](#重點六)
+* [重點七、多層 Cache 來減少 Miss Penalty Time](#重點七)
+* [重點八、Virtual Memory](#重點八)
+* [重點九、TLB (Translation Lookaside Buffer)](#重點九)
+* [重點十、Virtual Addressed Cache](#重點十)
+* [重點十ㄧ、Virtual Memory 保護機制](#重點十ㄧ)
+* [重點十二、Memory Hierarchy 4 Question](#重點十二)
+* [重點十三、3C](#重點十三)
+* [重點十四、Cache Control design](#重點十四)
+* [重點十五、Virtual Machine (參考 O.S)](#重點十五)
 
 
 ## 重點一
