@@ -20,5 +20,5 @@
 
 * [Markdown Tables Generator](http://www.tablesgenerator.com/markdown_tables)
 
-* [test](/Ch6 Memory.html)
+* [test](graduate_code/Ch6 Memory.html)
       
