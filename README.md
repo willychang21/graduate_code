@@ -1,7 +1,7 @@
 # graduate_code
 將學習資源納整於此，並加入自己學習的心得分享於此
 
-## 資工所相關學習網站
+## Computer_Science_Basic_Knowledge 
 
 * [演算法筆記](http://alrightchiu.github.io/SecondRound/mu-lu-yan-suan-fa-yu-zi-liao-jie-gou.html)
 
@@ -19,6 +19,9 @@
 * [PTT Grad-ProbAsk](https://www.ptt.cc/bbs/Grad-ProbAsk/index.html)
 
 * [Markdown Tables Generator](http://www.tablesgenerator.com/markdown_tables)
+
+## Heplful_Blog
+* [APPCODA](https://www.appcoda.com.tw/)
 
 
       
