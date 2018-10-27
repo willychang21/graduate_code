@@ -1,5 +1,5 @@
 # graduate_code
-將學習資源納整於此，並加入自己學習的心得分享於此
+collect learning resource in here
 
 ## Computer_Science_Basic_Knowledge 
 
