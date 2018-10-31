@@ -38,23 +38,24 @@ detection & recovery
 * 打破 Circular waiting：Process須按照資源編號(unique resource ID)遞增(Ascending)方式申請資源。
 #### 2.Deadlock avoidance
 當 process 提出資源申請時，OS 會執行Banker algorithm 來判斷系統在「假設核准該申請後」是否處於 Safe state，是則核准，否則請 process 等待。
-* safe state : 存在 safe sequence
-* unsafe state : 可能有 deadlock 
+* safe state : 至少存在 ≧1組 safe sequence , O.S 按照 order 分配 Resource
+* unsafe state : 可能有 deadlock
+* Time Complexity : O(n^2\*m) -> 耗時，耗成本
 ```C#
-//假設有 n 個 process , m 個 resource
+//假設有 n 個 process , m 種 resource
 int Request[m]　    //Process申請量
 int Available[m]    //系統目前各類資源的可用數量。(Available = 資源總量 - Allocation)
 int Max[n,m]        //各 process 需要多少資源才可以完成工作。
 int Allocation[n,m] //目前各 process 持有的資源量。
 int Need[n,m]       //還要多少資源才可以完成工作。 (Need = Max - Allocation)
 
-void Banker's_Algo()
+void Banker_Algo()
 {
-	if(Request_i <= Need_i)//檢查需求之合理性
+	if(Request_i <= Need_i)//檢查需求之合理性  O(m)
     {
-	   if(Request_i < Available)//檢察系統可否負擔
+	   if(Request_i < Available)//檢察系統可否負擔  O(m)
 	    {
-		   Allocation_i = Allocation_i + Request_i;
+		   Allocation_i = Allocation_i + Request_i;  // O(m)
 		   Need_i = Need_i -Request_i;
 		   Available = Available - Request_i;
 		   if(Safe()=="Safe") 
@@ -75,18 +76,19 @@ void Safe()
 {
 	while( Finish is not all TRUE )
 	{
-	   Work = Available;                //初始設定
-	   foreach(bool initial in Finish)  //初始設定
+	   Work = Available;                //初始設定  O(m)
+	   foreach(bool initial in Finish)  //初始設定  
 	   {
-		 initial = false;
+		 initial = false;           //         O(n)
 	   }
-	   foreach (i in process set P)
+	   foreach (i in process set P)     //check finish O(n)
 	   {
-	      if(Finish[i] == false)
+	      //最多檢查 process 數目 = n + (n-1) + ...+ 1 = n(n+1)/2
+	      if(Finish[i] == false && Need_i <= Work[i]) // O(m)      
 	       {
 		     Finish[i] == true;
-		     Work = Work + Allocation;
-			 P = P - {i};
+		     Work = Work + Allocation; //   O(m)
+	             P = P - {i};
 	       }
 	   }
 	   if (!Finish) return Unsafe;
@@ -94,6 +96,9 @@ void Safe()
 	return Safe;
 }
 ```
+#### 3. Deadlock Detection & Recovery
+
+
 
 
 
