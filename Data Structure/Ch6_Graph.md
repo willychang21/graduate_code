@@ -90,8 +90,11 @@
 
 ## Graph Traversal
 * DFS [DS]
+  * DFS order 不唯一
+  * 通常 vertex no. 小優先
 * DFS [Algo] [有向]
 * BFS
+  * BFS order 也不唯一
 * BFS [Algo] [無向]
 * 應用
 
