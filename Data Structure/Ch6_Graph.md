@@ -187,7 +187,7 @@ A : Priority Queue 不要用 Binary-Heap，改用 Fibonacci Heap，其 Decrease-
 Initially,每個點視為獨立 tree 的 root  
 Step 1 : 每顆 tree，挑出最小成本的樹邊  
 Step 2 : 每顆都挑出來後，如果有重複的就刪掉
-Step 3 : 重複 step 1~2，直到只剩 1 顆 tree or 無邊可挑
+Step 3 : 重複 step 1~2，直到只剩 1 顆 tree or 無邊可挑  
 Step 4 : if(S 的邊數 < V - 1) then 無 Spanning Tree 
 ## Shortest path length problem 
 * Dijkstra's algo 
