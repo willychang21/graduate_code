@@ -97,6 +97,27 @@ void Safe()
 }
 ```
 #### 3. Deadlock Detection & Recovery
+Allow system to enter deadlock state
+**Recovery 方法**
+* 1.kill processes in Deadlock
+  * kill "all" 全部刪除
+    ⇒ Cost 高 : processes 先前的工作成果全做白工 or process 數目太多
+  * kill "one" then detect again 一次刪一個 process，直到打破 deadlock
+    ⇒ Cost 高 : loop 次數高 x detect cost
+* 2.Resource Preemption 資源搶奪
+  * 挑選 victim process -> 剝奪其資源(可能造成 starvation) -> 恢復無該資源前狀態(cost 高)
+**Detection algorithm**
+* Single instance : topological sort (using wait-for graph)
+  * 使用 adjcent matrix : O(n2)
+  * 使用 adjcent list : O(V+E)
+* Several instance : 用 Banker algorithm 判斷系統是否已經在 unsafe state
+
+### Resource allocation graph
+Some facts about RAG :
+* If graph contains no cycles ⇒ no deadlock. 
+* If graph contains a cycle
+  * one instance ⇔ deadlock.
+  * several instances, possibility of deadlock. ( deadlock ⇒ cycle )
 
 
 
