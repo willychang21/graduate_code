@@ -105,7 +105,8 @@ Allow system to enter deadlock state
   * kill "one" then detect again 一次刪一個 process，直到打破 deadlock  
     ⇒ Cost 高 : loop 次數高 x detect cost
 * 2.Resource Preemption 資源搶奪
-  * 挑選 victim process -> 剝奪其資源(可能造成 starvation) -> 恢復無該資源前狀態(cost 高)  
+  * 挑選 victim process -> 剝奪其資源(可能造成 starvation) -> 恢復無該資源前狀態(cost 高)
+
 **Detection algorithm**
 * Single instance : topological sort (using wait-for graph)
   * 使用 adjcent matrix : O(n2)
