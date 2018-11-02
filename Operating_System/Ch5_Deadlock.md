@@ -12,7 +12,7 @@
   * I. 系統面
   * II. 日常生活面
 * (四) Deadlock v.s Starvation
-![image](https://user-images.githubusercontent.com/38349902/47733226-bf792380-dca2-11e8-9f18-d8559c70280d.png)
+![image](https://user-images.githubusercontent.com/38349902/47930902-41b65180-df08-11e8-96d5-926940ee41cd.png)
 
 ### Deadlock 處理方法
 Deadlock 三種處理方法：
