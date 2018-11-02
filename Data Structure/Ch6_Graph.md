@@ -137,15 +137,84 @@ else
 ```
 (3) Kruskal's Time = E * O(lgE) = O(ElgE)  
 #### [補充] Algo版
-
+Kruskal = O(ElgE)  
+又 E < v^2 ⇒ lgE < lgv^2 = 2lgv  
+所以 O(ElgE) = O(Elgv)
 
 ### 2. Prim's algo
+* Prim's algo [DS]
+* Prim's algo [Algo]
+#### Prim's algo [DS]
+G(V,E) , V = {1,2,3...n} , 令 U = {1}  
+Step 1 : 挑出最小成本邊 (u,v)，其中 u ∈ U , v ∈ V - U  
+Step 2 : (u,v) 加入 S 中，且 v 從 U - V 移到 U  
+Step 3 : 重複 step 1~2 直到 U = V or 無邊可挑  
+Step 4 : if(S 的邊數 < V - 1) then 無 Spanning Tree 
+**Time** : O(V^2) (用 Adjacency Matrix)
+#### Prim's algo [Algo] -> Based on BFS
+Time 分析 : O(V) + O(V) + O(VlgV) + O(ElgV) = O(ElgV) or O(VlgV) + O(ElgV)  
+一般而言，E > V (E ≧ V-1)，所以 Prim's time = O(ElgV) = Kruskal's time
+```C#
+MST-Prim(G,w,r) //w : 個邊成本值集合，r : start vertex 起點
+{
+  for(each u ∈ G.V) //設初值，V 個頂點 ⇒ O(V)
+  {
+    u.Key = ∞;
+    u.π = Nil;
+  }
+  r.Key = 0;  //起點 Key 值設 0
+  Q = G.V;    //把每點 Key 值放入 Priority Queue : Q 中 ⇒ 即將每個點的 Key 值建立一個 min-Heap ⇒ O(V)
+  while(Q != 0)
+  {
+    u = Extract-min(Q); //刪除最小 Key 值的點 ⇒ V 次 * 每次 O(lgV) ⇒ O(VlgV)
+    for(each v ∈ G.Adj[u]) //共 check Adj.list 所有 Nodes (2E個) ⇒ loop 2E 回
+    {
+      if(v ∈ Q && w(u,v) < v.key) //比較小的話就更新 Key 值
+      {
+        v.π = u;
+        △v.key = w(u,v);  //相當於是一個 Decrease-key 運作 ⇒ O(lgV)
+      }
+    } // for loop 共花了 : 2E * O(lgV) = O(ElgV)
+  }
+}
+```
+Q : 如何在更 fast ？    
+A : Priority Queue 不要用 Binary-Heap，改用 Fibonacci Heap，其 Decrease-key 只需花 O(1) (in amortiged cost)     
+所以 v.key = w(u,v) 此行花了 2E * O(1) = O(E)    
+∴ Prim's time = O(VlgV) + O(E) = O(VlgV + E)
+
 ### 3. Sollin's algo
+Initially,每個點視為獨立 tree 的 root  
+Step 1 : 每顆 tree，挑出最小成本的樹邊  
+Step 2 : 每顆都挑出來後，如果有重複的就刪掉
+Step 3 : 重複 step 1~2，直到只剩 1 顆 tree or 無邊可挑
+Step 4 : if(S 的邊數 < V - 1) then 無 Spanning Tree 
 ## Shortest path length problem 
 * Dijkstra's algo 
 * Bellman-Ford algo
-* Floyd-Warshall algo
+* Floyd-Warshall algo  
+
+|                 |           Dijkstra's algo          |          Bellman-Ford algo         | Floyd-Warshall algo |
+|:---------------:|:----------------------------------:|:----------------------------------:|:-------------------:|
+|     解決問題    | Single source to other Destination | Single source to other Destination | All pairs of vertex |
+|   圖中可有負邊  |                  x                 |                  √                 |          √          |
+| 可有負長度cycle |                  x                 |                  x                 |          x          |
+|       策略      |               Greedy               |         Dynamic Programming        |   Dynamic Program   |
+|   時間 : 矩陣   |               O(V^2)               |               O(V^3)               |        O(V^3)       |
+|   時間 : 串列   |       O(ElgV) or O(VlgV + E)       |               O(V*E)               |                     |
+
+### 1. Dijkstra's algo 
+
+### 2. Bellman-Ford algo
+
+### 3. Floyd-Warshall algo
+
 ## Johnson algo
+
+## AOV Network & Topological Sort
+## AOV Network & Critical Path & Critical Tasks
+## Articulation point & Biconnected Graph & Biconnected Component
+## 如何求出 Articulation point ？
  
 
 
