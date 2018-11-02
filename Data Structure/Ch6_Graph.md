@@ -122,6 +122,18 @@ Step 4 : 如果 S 的邊數 < n-1 -> 那 S 就不是 min Spannning Tree
 Kruskal's algo 最多做 E 回合，而每回合主要做 2 個任務  
 (1) Delete-min in cost edge : 利用 heap 維持成本值，則 delete-min 花 O(lgE)  
 (2) 判斷邊加入 S 是否有 cycle  
+作法 : 利用 Disjoint sets 的 Union 與 Find 運作，Initially，每個點都當一個 Disjoint Set  
+```C#
+if(Find(u) != Find(v))
+{
+  add(u,v) into S;
+  Union(u,v);
+}
+else
+{
+  give up (u,v) edge;
+}
+```
 
 ### 2. Prim's algo
 ### 3. Sollin's algo
