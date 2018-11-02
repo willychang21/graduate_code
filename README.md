@@ -3,7 +3,9 @@ collect learning resource in here
 
 ## Computer_Science_Basic_Knowledge 
 
-* [演算法筆記](http://alrightchiu.github.io/SecondRound/mu-lu-yan-suan-fa-yu-zi-liao-jie-gou.html)
+* [Second Round](http://alrightchiu.github.io/SecondRound/mu-lu-yan-suan-fa-yu-zi-liao-jie-gou.html)
+
+* [演算法筆記](http://www.csie.ntnu.edu.tw/~u91029/index.html)
 
 * [GeeksForGeeks](https://www.geeksforgeeks.org/)
 
