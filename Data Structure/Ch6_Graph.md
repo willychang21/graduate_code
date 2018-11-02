@@ -113,12 +113,12 @@
   * Prim's algo
   * Sollin's algo
 ### 1. Kruskal's algo
-(一) 方法  
+*(一) 方法*
 Step 1 : 從所有邊 E 挑出 cost 最小的邊  
 Step 2 : 判斷這個邊加到 S 中會不會有 cycle，會的話就放棄這個邊 (一開始 S 是空的，慢慢加邊進去)  
 Step 3 : 重複 Step 1 ~ Step 2 直到挑出 n-1 個邊 or 所有邊 E 都被挑完了  
 Step 4 : 如果 S 的邊數 < n-1 -> 那 S 就不是 min Spannning Tree  
-(二) Time 分析  
+*(二) Time 分析*  
 Kruskal's algo 最多做 E 回合，而每回合主要做 2 個任務  
 (1) Delete-min in cost edge : 利用 heap 維持成本值，則 delete-min 花 O(lgE)  
 (2) 判斷邊加入 S 是否有 cycle  
