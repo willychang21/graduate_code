@@ -322,6 +322,7 @@ TLB : 為 CPU 的一種 Cache，紀錄最近用過的轉換資訊，加速 addre
 ## 重點十
 ### Virtual Addressed Cache 
 ![image](https://user-images.githubusercontent.com/38349902/47294369-75a79200-d63f-11e8-8f8a-5cc4cc2aec42.png)
+
 |      | Physical Addressed Cache                                                                    | Virtual Addressed Cache                                         | Mix Addressed Cache                            |
 |------|---------------------------------------------------------------------------------------------|-----------------------------------------------------------------|------------------------------------------------|
 |      | Physical Index ,  Physical Tagged                                                           | Virtual Index ,  Virtual Tagged                                 | Virtual Index ,  Physical Tagged               |
